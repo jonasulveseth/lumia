@@ -1,0 +1,32 @@
+<style>
+	li{
+		list-style: none;
+		float: left;
+		margin-right:  15px;
+		font-size: 19px;
+	}
+	
+</style>
+
+<ul class="test">
+    <li><a href="<?= $this->url(array('controller' => 'about' , 'action' => 'index')) ?>">ABOUT LUMIA</a></li>
+    <li><a href="<?= $this->url(array('controller' => 'lumia-invest' , 'action' => 'index')) ?>">LUMIA INVEST</a></li>
+    <li>LUMIA DEVELOPMENT</li>
+    <li>SHOWCASE</li>
+    <li>CONTACT</li>
+</ul>
+<div class="span.24"><br/><br/></div>
+<div class="span-7 first">
+    <div class="span-5">
+    <a href="<?= $this->url(array('controller' => 'index' , 'action' => 'index')) ?>" class="logotype">
+        <img src="<?= $this->baseUrl() ?>/images/logotype.jpg" />
+    </a>
+        <div style="font-size: 1.8em; color: #999999; position: relative; left: 28px; top: 10px; width: 230px">   
+            LUMIA is a <span class="web">web</span> developer company , a <span class="web">web</span> startup company and a <span class="web">web</span> investment company.
+        </div>
+    </div>
+</div>
+
+<div class="span-17 last" style="position: relative; top: -10px;">
+<?= $this->render('nivoslider.phtml') ?>
+</div>

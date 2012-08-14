@@ -1,0 +1,10 @@
+<div class="span-24"> 
+    <?php foreach ($this->articles as $article): ?>
+    <div class="span-8 first last">
+        <h3><?= $article->title  ?></h3>
+    <?= $article->body ?>
+    </div>
+    <?php endforeach; ?>
+
+</div>
+
