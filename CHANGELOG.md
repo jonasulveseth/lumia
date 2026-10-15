@@ -2,6 +2,11 @@
 
 ## 2026-10-15
 
+### Infrastructure
+- Lumia körs som systemd-tjänsten `lumia` i production på port 3077 med Solid Queue i Puma; startar vid boot (`config/lumia.service`).
+- Production kör över http på lokala nätet (SSL styrs med `RAILS_ASSUME_SSL`/`RAILS_FORCE_SSL`), databasen med peer-autentisering.
+- ufw släpper in 192.168.68.0/24 på port 3077. (c8ccbc1)
+
 ### Features
 - Ny app: Lumia, en holistisk livscoach på Rails 8.1 med strukturen från reemove (Hotwire, Tailwind, Postgres, Solid Queue, stilguide, AiProvider/InferenceConfig).
 - Livsområden, ramverk/skolor och mätvärden som kataloger i `config/lumia/*.yml`, med svenska och engelska texter.

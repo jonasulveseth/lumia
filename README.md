@@ -5,7 +5,7 @@ En holistisk livscoach byggd på Rails 8. Se `docs/overview.md` för konceptet o
 ```
 bundle install
 bin/rails db:prepare db:seed
-bin/dev            # http://localhost:3077
+bin/dev            # http://localhost:3078 (3077 är produktionstjänsten)
 bin/rails test
 ```
 
