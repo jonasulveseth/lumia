@@ -1,0 +1,35 @@
+# Livsområdena i Lumia. Namn och beskrivningar ligger i locales (lumia.areas.*).
+# Strukturen här är samma för alla användare – innehållet (ramverk, mål,
+# experiment) är det som blir personligt.
+health:
+  icon: heart-pulse
+  color: rose
+  metrics: [sleep_hours, sleep_quality, steps, workout_minutes, weight, resting_hr]
+nutrition:
+  icon: salad
+  color: lime
+  metrics: [weight, alcohol_units, water_liters]
+mind:
+  icon: brain
+  color: violet
+  metrics: [mood, energy, stress, meditation_minutes]
+relationships:
+  icon: users
+  color: amber
+  metrics: [social_hours]
+career:
+  icon: briefcase
+  color: sky
+  metrics: [focus_hours, work_hours]
+learning:
+  icon: book-open
+  color: teal
+  metrics: [reading_minutes]
+finance:
+  icon: wallet
+  color: emerald
+  metrics: [savings_rate]
+meaning:
+  icon: compass
+  color: indigo
+  metrics: []

@@ -1,0 +1,3 @@
+<% content_for :title, @experiment.title %>
+<%= page_header(@experiment.title) { link_to t("shared.back"), experiments_path, class: ui_button(:secondary) } %>
+<%= render "form", experiment: @experiment %>

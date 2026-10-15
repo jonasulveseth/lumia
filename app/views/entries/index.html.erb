@@ -1,0 +1,20 @@
+<% content_for :title, t("nav.entries") %>
+<%= turbo_stream_from current_user, :entries %>
+<%= page_header(t("entries.title"), t("entries.subtitle")) %>
+
+<%= render "entries/quick_form", entry: @entry %>
+
+<div class="flex flex-wrap gap-1.5 my-5">
+  <%= link_to t("shared.all"), entries_path, class: ui_button(@area_key ? :chip : :chip_active) %>
+  <% Area.all.each do |area| %>
+    <%= link_to area.name, entries_path(area: area.key), class: ui_button(@area_key == area.key ? :chip_active : :chip) %>
+  <% end %>
+</div>
+
+<div id="entries" class="space-y-2">
+  <% if @entries.any? %>
+    <%= render @entries %>
+  <% else %>
+    <%= empty_state(t("entries.empty")) %>
+  <% end %>
+</div>

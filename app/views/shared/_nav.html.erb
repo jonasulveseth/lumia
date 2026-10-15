@@ -1,0 +1,37 @@
+<nav class="space-y-6">
+  <div class="space-y-0.5">
+    <%= render "shared/nav_link", path: root_path, icon_name: "sun", label: t("nav.today") %>
+    <%= render "shared/nav_link", path: coach_path, icon_name: "message-circle", label: t("nav.coach"), prefix: "/conversations" %>
+    <%= render "shared/nav_link", path: entries_path, icon_name: "notebook-pen", label: t("nav.entries") %>
+    <%= render "shared/nav_link", path: check_ins_path, icon_name: "calendar-check", label: t("nav.check_ins"), prefix: "/check_ins" %>
+    <%= render "shared/nav_link", path: experiments_path, icon_name: "flask-conical", label: t("nav.experiments"), prefix: "/experiments" %>
+    <%= render "shared/nav_link", path: insights_path, icon_name: "sparkles", label: t("nav.insights") %>
+  </div>
+
+  <div>
+    <p class="px-3 mb-1 text-[11px] font-medium uppercase tracking-wide text-zinc-400"><%= t("nav.areas") %></p>
+    <div class="space-y-0.5">
+      <% current_user.active_life_areas.each do |la| %>
+        <%= render "shared/nav_link", path: area_path(la), dot: area_color(la.area), label: la.name %>
+      <% end %>
+      <%= render "shared/nav_link", path: areas_path, icon_name: "plus", label: t("nav.manage_areas") %>
+    </div>
+  </div>
+
+  <div>
+    <p class="px-3 mb-1 text-[11px] font-medium uppercase tracking-wide text-zinc-400"><%= t("nav.data") %></p>
+    <div class="space-y-0.5">
+      <%= render "shared/nav_link", path: measurements_path, icon_name: "activity", label: t("nav.measurements"), prefix: "/measurements" %>
+      <%= render "shared/nav_link", path: documents_path, icon_name: "file-heart", label: t("nav.documents"), prefix: "/documents" %>
+      <%= render "shared/nav_link", path: memories_path, icon_name: "brain", label: t("nav.memories") %>
+      <%= render "shared/nav_link", path: approaches_path, icon_name: "library", label: t("nav.approaches") %>
+    </div>
+  </div>
+
+  <div class="space-y-0.5 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+    <%= render "shared/nav_link", path: settings_path, icon_name: "settings", label: t("nav.settings") %>
+    <%= button_to session_path, method: :delete, class: "w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 cursor-pointer" do %>
+      <%= icon("log-out") %> <%= t("nav.sign_out") %>
+    <% end %>
+  </div>
+</nav>

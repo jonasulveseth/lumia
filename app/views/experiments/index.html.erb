@@ -1,0 +1,28 @@
+<% content_for :title, t("nav.experiments") %>
+<%= page_header(t("experiments.title"), t("experiments.subtitle")) { link_to safe_join([icon("plus"), t("experiments.new")]), new_experiment_path, class: ui_button(:primary) } %>
+
+<% [[:active, @active], [:finished, @finished]].each do |group, experiments| %>
+  <section class="mb-8">
+    <h2 class="text-sm font-semibold mb-3"><%= t("experiments.groups.#{group}") %></h2>
+    <% if experiments.any? %>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <% experiments.each do |e| %>
+          <%= link_to edit_experiment_path(e), class: "#{ui_surface(:panel)} bg-white dark:bg-zinc-900/60 block hover:border-teal-400" do %>
+            <div class="flex items-start justify-between gap-2">
+              <p class="text-sm font-medium"><%= e.title %></p>
+              <span class="<%= ui_badge(e.status == "running" ? :good : :neutral) %> shrink-0"><%= t("experiments.status.#{e.status}") %></span>
+            </div>
+            <% if e.hypothesis.present? %><p class="text-xs text-zinc-500 mt-1 line-clamp-2"><%= e.hypothesis %></p><% end %>
+            <div class="flex flex-wrap items-center gap-2 mt-2">
+              <%= area_badge(e.area_key) if e.area_key %>
+              <% if e.days_left %><span class="text-xs text-zinc-500"><%= t("experiments.days_left", count: e.days_left) %></span><% end %>
+            </div>
+            <% if e.learning.present? %><p class="text-sm mt-2"><span class="text-zinc-500"><%= t("experiments.fields.learning") %>:</span> <%= e.learning %></p><% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= empty_state(t("experiments.empty_#{group}")) %>
+    <% end %>
+  </section>
+<% end %>

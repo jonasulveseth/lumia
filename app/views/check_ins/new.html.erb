@@ -1,0 +1,3 @@
+<% content_for :title, t("check_ins.new_title") %>
+<%= page_header(t("check_ins.new_title"), t("check_ins.week", week: Date.current.cweek)) %>
+<%= render "form", check_in: @check_in %>

@@ -1,0 +1,13 @@
+<%= tag.div id: dom_id(message), class: "flex #{message.user? ? "justify-end" : "justify-start"}" do %>
+  <% if message.user? %>
+    <div class="max-w-[85%] rounded-2xl rounded-br-md bg-zinc-800 dark:bg-zinc-700 text-white px-4 py-2.5 text-sm whitespace-pre-line"><%= message.content %></div>
+  <% else %>
+    <div class="max-w-[85%] rounded-2xl rounded-bl-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-4 py-2.5 text-sm">
+      <% if message.content.blank? %>
+        <span class="inline-flex items-center gap-2 text-zinc-500"><%= icon("loader-circle", css: "w-4 h-4 animate-spin") %><%= t("coach.thinking") %></span>
+      <% else %>
+        <div class="prose-lumia"><%= markdown(message.content) %></div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

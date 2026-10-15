@@ -1,0 +1,409 @@
+en:
+  shared:
+    close: Close
+    see_all: See all
+    all: All
+    save: Save
+    add: Add
+    edit: Edit
+    delete: Delete
+    back: Back
+    refresh: Refresh
+    confirm_delete: Are you sure?
+  flash:
+    saved: Saved.
+    deleted: Deleted.
+  fields:
+    name: Name
+    email: Email
+    password: Password
+    new_password: New password
+    password_confirmation: Confirm password
+    birth_year: Year of birth
+    about_me: About you
+    coach_style: How do you want to be coached?
+    locale: Language
+    focus_goal: Focus goal
+    current_state: Where you are now
+    title: Title
+  nav:
+    today: Today
+    coach: Coach
+    entries: Log
+    check_ins: Weekly check-in
+    experiments: Experiments
+    insights: Patterns
+    areas: Life areas
+    manage_areas: Manage areas
+    data: Data
+    measurements: Measurements
+    documents: Lab results
+    memories: What Lumia knows
+    approaches: Frameworks & schools
+    settings: Settings
+    sign_out: Sign out
+  sessions:
+    title: Sign in
+    subtitle: Welcome back to Lumia.
+    submit: Sign in
+    forgot: Forgot your password?
+    invalid: Wrong email or password.
+    rate_limited: Too many attempts. Please wait a moment and try again.
+  registrations:
+    title: Create account
+    subtitle: Lumia is your personal life coach – for all of life, not just one part of it.
+    submit: Get started
+    link: Create account
+    have_account: Already have an account? Sign in
+    password_hint: At least 8 characters.
+  passwords:
+    forgot_title: Forgot password
+    edit_title: Choose a new password
+    send: Send reset link
+    save: Save password
+    sent: If that address exists we have sent instructions.
+    reset: Your password has been changed.
+    mismatch: The passwords did not match.
+    invalid_token: The link is invalid or has expired.
+    mail_subject: Reset your password
+    mail_link: this page
+    mail_body_html: "You can choose a new password on %{link}. The link is valid for 15 minutes."
+    mail_body_text: "Choose a new password here (valid for 15 minutes):"
+  coach_styles:
+    gentle:
+      name: Warm and supportive
+      description: Small steps, encouragement and patience.
+    direct:
+      name: Direct and challenging
+      description: Honest feedback and clear commitments.
+    socratic:
+      name: Questioning
+      description: Good questions that help you find your own answers.
+    analytical:
+      name: Analytical
+      description: Numbers, trends and measurable experiments.
+  onboarding:
+    title: Get started
+    step: Step %{n} of %{total}
+    next: Next
+    back: Back
+    finish: Done – show my overview
+    done: Welcome! A good start is to write down what is going on right now.
+    profile:
+      title: Tell us a bit about yourself
+      intro: This is the foundation the coach starts from. You can change everything later.
+      about_placeholder: What matters to you right now? What do you want to be different a year from now?
+    areas:
+      title: Your life areas
+      intro: Choose the areas you want to work on and rate how satisfied you are today. One focus goal per area is enough – small is good.
+      rating: How satisfied are you
+      goal_placeholder: For example "sleep 7 hours four nights a week"
+    approaches:
+      title: What resonates with you?
+      intro: There are many schools – in nutrition, training, wellbeing and career. Lumia uses the same framework for everyone, but the content adapts to what you believe in. Mark what feels right, what you are curious about and what you don't want.
+  dashboard:
+    greeting:
+      morning: Good morning %{name}
+      day: Hi %{name}
+      evening: Good evening %{name}
+    wheel: Wheel of life
+    wheel_empty: Activate at least three life areas to see the wheel of life.
+    update_ratings: Update
+    check_in_title: This week's check-in
+    check_in_done: You have reflected this week.
+    check_in_view: View check-in
+    check_in_todo: Ten minutes to look back on the week and pick the next small step.
+    check_in_start: Do this week's check-in
+    experiments: Running experiments
+    no_experiments: No experiment running. What do you want to try?
+    insights: Patterns Lumia has noticed
+    recent_entries: Latest in the log
+  entries:
+    title: Log
+    subtitle: Write freely. Lumia files it under the right area, picks out measurements and learns who you are.
+    placeholder: What's happening? "Slept badly, 5 hours. Stressful meeting. Lunch walk felt great."
+    hint: Numbers you mention (sleep, steps, mood 1–10) are saved as measurements.
+    save: Save
+    created: Saved to the log.
+    processing: Analysing
+    from_chat: From chat
+    empty: Nothing in the log yet.
+  areas:
+    title: Life areas
+    subtitle: The structure is the same for everyone – where you are, a focus goal and small experiments. Activate the areas you want to work on.
+    activate: Activate
+    deactivate: Pause
+    rating: Satisfaction
+    talk: Talk about %{area}
+    framework: Now and focus
+    current_state_placeholder: What does it look like today, in your own words?
+    focus_goal_placeholder: What do you want to move towards in the coming weeks?
+    log: Log for this area
+    metrics: Measurements
+    no_data: No data
+    no_experiments: No experiments here yet.
+    approaches: Frameworks for this area
+    memories: What Lumia knows here
+  approaches:
+    title: Frameworks & schools
+    subtitle: Choose what resonates with you. The coach follows what you chose, explores what you're curious about and never suggests what you rejected.
+    general: Behaviour change in general
+    stance:
+      none: Neutral
+      resonates: Fits me
+      curious: Curious
+      rejected: Not for me
+  measurements:
+    title: Measurements
+    subtitle: Everything that can be measured – from the log, lab results or entered by hand.
+    metric: Metric
+    value: Value
+    when: When
+    add: Add
+    latest: Latest
+    trend: Trend
+    count: Count
+    reference: Reference
+    source: Source
+    from_entry: Log
+    manual: Manual
+    out_of_range: Outside reference
+    too_few: At least two values are needed for a chart.
+    empty: No measurements yet. Log sleep, mood or upload a lab result.
+  documents:
+    title: Lab results
+    subtitle: Upload lab results and medical records. Lumia reads the values so you can follow them over time.
+    new: Upload
+    new_intro: PDF or text. You can also paste the text directly from your health portal or lab.
+    title_placeholder: For example "Blood tests at the clinic"
+    taken_on: Sample date
+    kind: Type
+    file: File
+    file_hint: PDF or text file. Images are not supported yet – paste the text instead.
+    paste: Or paste text
+    paste_placeholder: "Hb 142 g/L (134–170)\nLDL 3.9 mmol/L (<3.0)…"
+    privacy: The document is analysed by the AI model Lumia is configured with. Only upload what you are comfortable with.
+    analyze: Upload and analyse
+    uploaded: Uploaded. The analysis takes a moment.
+    reanalyze: Analyse again
+    reanalyzing: Analysing again.
+    analyzing: Reading the document …
+    failed: The analysis failed.
+    summary: Summary
+    not_medical_advice: Lumia is not healthcare. Talk to your doctor about values that worry you.
+    empty: No lab results uploaded yet.
+    kinds:
+      lab_result: Lab result
+      medical_record: Medical record
+      other: Other
+    status:
+      pending: Waiting
+      processing: Analysing
+      done: Done
+      failed: Failed
+    errors:
+      no_text: No text found in the document.
+  check_ins:
+    title: Weekly check-in
+    subtitle: The same four questions every week. Over time this becomes Lumia's best source of patterns.
+    start: Do this week's check-in
+    edit_this_week: Continue this week's check-in
+    new_title: This week's check-in
+    week: Week %{week}
+    ratings_title: How has the week been?
+    ratings_intro: Rate each area from 1 to 10. Gut feeling is enough.
+    energy: Energy
+    submit: Save and get feedback
+    saved: Saved. The coach is writing feedback.
+    coach_reply: Coach feedback
+    coach_thinking: The coach is reading your week …
+    empty: No check-ins yet.
+    questions:
+      went_well: What went well?
+      challenges: What was hard?
+      learned: What did you learn about yourself?
+      next_focus: What do you want to focus on next week?
+  experiments:
+    title: Experiments
+    subtitle: What am I testing now – and what did I learn? Small, time-boxed trials beat big resolutions.
+    new: New experiment
+    new_intro: Phrase it as a test with an end date. Two weeks is usually about right.
+    title_placeholder: No screens after 10 pm for two weeks
+    hypothesis_placeholder: If I … then I think …
+    general: General
+    evaluate: Evaluate
+    learning_hint: What you learn is saved in Lumia's memory.
+    days_left:
+      zero: Last day
+      one: 1 day left
+      other: "%{count} days left"
+    created: The experiment is running. Good luck!
+    empty_active: No running experiments.
+    empty_finished: No finished experiments yet.
+    groups:
+      active: Running
+      finished: Finished
+    fields:
+      title: What are you testing?
+      hypothesis: Hypothesis
+      area: Area
+      approach: Framework
+      starts_on: Starts
+      ends_on: Ends
+      status: Status
+      outcome: What happened?
+      learning: What did you learn?
+      success_rating: Outcome 1–10
+    status:
+      planned: Planned
+      running: Running
+      completed: Completed
+      abandoned: Abandoned
+  memories:
+    title: What Lumia knows about you
+    subtitle: Everything the coach believes it knows, in one place. Correct it, pin what matters most or ask Lumia to forget.
+    add_label: Add something Lumia should know
+    add_placeholder: I train best in the morning
+    category: Category
+    pin: Pin
+    forget: Forget
+    forgotten: Lumia has forgotten it.
+    empty: Lumia doesn't know anything about you yet. Write in the log or talk to the coach.
+    categories:
+      fact: Fact
+      preference: Preference
+      value: Value
+      goal: Goal
+      health: Health
+      pattern: Pattern
+      learning: Learning
+    sources:
+      ai: Learned by Lumia
+      user: Added by you
+      experiment: From an experiment
+  insights:
+    title: Patterns
+    subtitle: Connections across your life areas. Lumia looks every Monday, or when you ask.
+    generate: Look for patterns now
+    generating: Lumia is looking for patterns. The page updates when it's done.
+    evidence: What is this based on?
+    test: Test as an experiment
+    useful: Useful
+    dismiss: Not relevant
+    empty: No patterns yet. The more you log and reflect, the more Lumia sees.
+    kinds:
+      pattern: Pattern
+      correlation: Correlation
+      suggestion: Suggestion
+  coach:
+    title: Coach
+    subtitle: Talk about anything. The coach knows your areas, frameworks, experiments and measurements.
+    new: New conversation
+    placeholder: What's on your mind?
+    reply_placeholder: Write a reply … (Enter sends, Shift+Enter new line)
+    send: Send
+    all_areas: All areas
+    thinking: Thinking …
+    empty_conversation: The conversation is empty.
+    error: The coach could not answer right now. Please try again in a moment.
+    starters:
+      - Why am I so tired in the afternoons?
+      - Help me pick an experiment for this week
+      - What do my lab results say?
+      - I want to get back into training
+  settings:
+    title: Settings
+  lumia:
+    areas:
+      health:
+        name: Health & body
+        description: Sleep, movement, recovery and what your lab results say.
+        topics: [Sleep, Movement, Recovery, Lab results]
+      nutrition:
+        name: Nutrition
+        description: What you eat, how it makes you feel and which food philosophy fits you.
+        topics: [Meals, Food philosophy, Habits, Drinks]
+      mind:
+        name: Mind & wellbeing
+        description: Mood, stress, energy and the mental tools that help you.
+        topics: [Mood, Stress, Energy, Mental training]
+      relationships:
+        name: Relationships
+        description: Partner, family, friends and the communities you belong to.
+        topics: [Partner, Family, Friends, Community]
+      career:
+        name: Career & work
+        description: Goals, skills, projects and how work feels.
+        topics: [Goals, Skills, Projects, Feedback]
+      learning:
+        name: Learning
+        description: What you want to understand or master – books, courses, crafts.
+        topics: [Reading, Courses, Skills, Curiosity]
+      finance:
+        name: Finance
+        description: Buffer, savings and money going to what you value.
+        topics: [Buffer, Savings, Spending, Goals]
+      meaning:
+        name: Meaning & values
+        description: What matters to you and whether life is moving in that direction.
+        topics: [Values, Purpose, Contribution, Reflection]
+    approaches:
+      mediterranean: { name: Mediterranean diet, description: "Vegetables, legumes, olive oil, fish and nuts. Little red meat and ultra-processed food." }
+      low_carb: { name: Low carb / LCHF, description: "Less sugar and starch, more protein, fat and green vegetables – Atkins style." }
+      plant_based: { name: Plant-based, description: "Mostly or only plants, keeping an eye on protein, B12, iron and omega-3." }
+      intermittent_fasting: { name: Intermittent fasting, description: "A shorter eating window, for example 16:8." }
+      flexible_counting: { name: Flexible dieting, description: "Nothing forbidden, but track protein and energy over time." }
+      nordic: { name: Nordic diet, description: "Seasonal food, root vegetables, berries, rye, fish and rapeseed oil." }
+      longevity_training: { name: Training for longevity, description: "Lots of easy cardio (zone 2), some intervals, strength and balance." }
+      strength_first: { name: Strength first, description: "Progressive strength training 2–4 times a week, supported by protein and sleep." }
+      sleep_first: { name: Sleep first, description: "Regular times, morning light and sleep as the foundation for everything else." }
+      daily_movement: { name: Everyday movement, description: "Walks, stairs and short breaks from sitting." }
+      stoicism: { name: Stoicism, description: "Separate what you can and cannot control. Daily reflection." }
+      mindfulness: { name: Mindfulness, description: "Regular attention training – short and often." }
+      cbt_tools: { name: CBT tools, description: "Notice automatic thoughts, test them and take small steps. Not a replacement for therapy." }
+      act: { name: ACT, description: "Accept difficult feelings and act towards your values." }
+      gottman: { name: The Gottman method, description: "Turn towards bids for connection, soft start-ups and repair attempts." }
+      nonviolent_communication: { name: Nonviolent Communication, description: "Observation, feeling, need and a concrete request." }
+      attachment_aware: { name: Attachment-aware, description: "Understand your own and others' attachment patterns." }
+      deep_work: { name: Deep Work, description: "Protect long blocks of undistracted focus." }
+      ikigai: { name: Ikigai, description: "Where what you love, are good at, the world needs and you can be paid for meet." }
+      design_your_life: { name: Designing Your Life, description: "Prototype career choices with conversations and small experiments." }
+      career_capital: { name: Career capital, description: "Build rare and valuable skills first – passion follows." }
+      spaced_repetition: { name: Spaced repetition, description: "Test yourself instead of re-reading." }
+      learning_by_doing: { name: Learning by doing, description: "Projects just above your level, fast feedback." }
+      feynman: { name: The Feynman technique, description: "Explain simply, find the gaps, go back to the source." }
+      buffer_first: { name: Buffer first, description: "A few months of buffer and no expensive debt before anything else." }
+      index_investing: { name: Index investing, description: "Cheap broad funds, automatic monthly saving, long horizon." }
+      fire: { name: FIRE, description: "High savings rate and lower fixed costs towards financial independence." }
+      values_based_spending: { name: Values-based spending, description: "Generous on what you value, frugal on the rest." }
+      values_compass: { name: Values compass, description: "Name your values and check weekly whether your time matches." }
+      logotherapy: { name: Logotherapy (Frankl), description: "Meaning through creating, loving and facing the unavoidable." }
+      contribution: { name: Contribution, description: "Meaning through helping others and belonging to something bigger." }
+      atomic_habits: { name: Atomic Habits, description: "Make it obvious, attractive, easy and satisfying. Identity before goals." }
+      tiny_habits: { name: Tiny Habits, description: "Anchor a tiny habit to something you already do and celebrate immediately." }
+      implementation_intentions: { name: If-then plans, description: "\"When X happens, I will do Y\" – concrete plans for when and where." }
+    metrics:
+      sleep_hours: Sleep
+      sleep_quality: Sleep quality
+      steps: Steps
+      workout_minutes: Training
+      weight: Weight
+      resting_hr: Resting heart rate
+      alcohol_units: Alcohol
+      water_liters: Water
+      mood: Mood
+      energy: Energy
+      stress: Stress
+      meditation_minutes: Meditation
+      social_hours: Social time
+      focus_hours: Focus time
+      work_hours: Work hours
+      reading_minutes: Reading
+      savings_rate: Savings rate
+  activerecord:
+    errors:
+      models:
+        document:
+          attributes:
+            base:
+              file_or_text_missing: Upload a file or paste text.

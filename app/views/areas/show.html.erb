@@ -1,0 +1,102 @@
+<% content_for :title, @area.name %>
+<%= turbo_stream_from current_user, :entries %>
+
+<div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+  <div>
+    <div class="flex items-center gap-2">
+      <span class="<%= area_color(@area, :text) %>"><%= icon(@area.icon, css: "w-6 h-6") %></span>
+      <h1 class="text-2xl font-semibold"><%= @area.name %></h1>
+      <% if @life_area.rating %><span class="<%= ui_badge(:neutral) %>"><%= @life_area.rating %>/10</span><% end %>
+    </div>
+    <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400 max-w-2xl"><%= @area.description %></p>
+  </div>
+  <%= button_to conversations_path, params: { conversation: { area_key: @area.key } }, class: ui_button(:primary) do %>
+    <%= icon("message-circle") %> <%= t("areas.talk", area: @area.name.downcase) %>
+  <% end %>
+</div>
+
+<div class="grid lg:grid-cols-3 gap-6">
+  <div class="lg:col-span-2 space-y-6">
+    <%= form_with model: @life_area, url: area_path(@life_area), method: :patch, class: "#{ui_surface(:card)} space-y-4" do |f| %>
+      <h2 class="font-semibold"><%= t("areas.framework") %></h2>
+      <div>
+        <%= f.label :current_state, t("fields.current_state"), class: ui_field(:label) %>
+        <%= f.text_area :current_state, rows: 3, placeholder: t("areas.current_state_placeholder"), class: ui_field(:input) %>
+      </div>
+      <div>
+        <%= f.label :focus_goal, t("fields.focus_goal"), class: ui_field(:label) %>
+        <%= f.text_area :focus_goal, rows: 2, placeholder: t("areas.focus_goal_placeholder"), class: ui_field(:input) %>
+      </div>
+      <div data-controller="range" class="max-w-xs">
+        <label class="<%= ui_field(:label) %>"><%= t("areas.rating") %>: <span class="font-semibold" data-range-target="output"></span>/10</label>
+        <%= f.range_field :rating, value: @life_area.rating || 5, min: 1, max: 10, class: "w-full accent-teal-600", data: { range_target: "input", action: "input->range#update" } %>
+      </div>
+      <div class="flex justify-end"><%= f.submit t("shared.save"), class: ui_button(:solid) %></div>
+    <% end %>
+
+    <section>
+      <h2 class="font-semibold mb-3"><%= t("areas.log") %></h2>
+      <%= render "entries/quick_form", entry: @entry %>
+      <div id="entries" class="space-y-2 mt-3">
+        <%= render @entries %>
+      </div>
+    </section>
+  </div>
+
+  <div class="space-y-6">
+    <% if @metric_keys.any? || @area.metrics.any? %>
+      <section class="<%= ui_surface(:card) %> p-5">
+        <h2 class="font-semibold mb-3"><%= t("areas.metrics") %></h2>
+        <ul class="space-y-3">
+          <% (@metric_keys | @area.metrics.map(&:key)).first(8).each do |key| %>
+            <% series = Measurement.series(current_user, key).to_a %>
+            <li>
+              <%= link_to measurement_path(key), class: "flex items-center justify-between gap-2" do %>
+                <span class="text-sm"><%= series.last&.display_label || Metric.find(key)&.name %></span>
+                <% if series.any? %>
+                  <span class="flex items-center gap-2"><%= sparkline(series.map(&:value), width: 70, height: 22, color: ApplicationHelper::AREA_COLORS.dig(@area.color, :hex)) %><span class="text-sm font-medium"><%= number_display(series.last.value) %></span></span>
+                <% else %>
+                  <span class="text-xs text-zinc-400"><%= t("areas.no_data") %></span>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+
+    <section class="<%= ui_surface(:card) %> p-5">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="font-semibold"><%= t("nav.experiments") %></h2>
+        <%= link_to icon("plus"), new_experiment_path(area: @area.key), class: ui_button(:icon), title: t("experiments.new") %>
+      </div>
+      <% if @experiments.any? %>
+        <ul class="space-y-2">
+          <% @experiments.each do |e| %>
+            <li><%= link_to e.title, edit_experiment_path(e), class: "text-sm hover:underline" %> <span class="<%= ui_badge(e.status == "running" ? :good : :neutral) %>"><%= t("experiments.status.#{e.status}") %></span></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <%= empty_state(t("areas.no_experiments")) %>
+      <% end %>
+    </section>
+
+    <section class="<%= ui_surface(:card) %> p-5">
+      <h2 class="font-semibold mb-3"><%= t("areas.approaches") %></h2>
+      <div class="space-y-2">
+        <% @area.approaches.each do |a| %>
+          <%= render "approaches/approach", approach: a, choice: @choices[a.key], compact: true %>
+        <% end %>
+      </div>
+    </section>
+
+    <% if @memories.any? %>
+      <section class="<%= ui_surface(:card) %> p-5">
+        <h2 class="font-semibold mb-3"><%= t("areas.memories") %></h2>
+        <ul class="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+          <% @memories.each do |m| %><li class="flex gap-2"><%= icon("dot") %><%= m.content %></li><% end %>
+        </ul>
+      </section>
+    <% end %>
+  </div>
+</div>

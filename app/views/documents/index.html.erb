@@ -1,0 +1,11 @@
+<% content_for :title, t("nav.documents") %>
+<%= turbo_stream_from current_user, :documents %>
+<%= page_header(t("documents.title"), t("documents.subtitle")) { link_to safe_join([icon("upload"), t("documents.new")]), new_document_path, class: ui_button(:primary) } %>
+
+<div class="space-y-2">
+  <% if @documents.any? %>
+    <%= render @documents %>
+  <% else %>
+    <%= empty_state(t("documents.empty")) %>
+  <% end %>
+</div>

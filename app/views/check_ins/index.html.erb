@@ -1,0 +1,22 @@
+<% content_for :title, t("nav.check_ins") %>
+<%= page_header(t("check_ins.title"), t("check_ins.subtitle")) do %>
+  <%= link_to current_user.current_check_in ? t("check_ins.edit_this_week") : t("check_ins.start"), new_check_in_path, class: ui_button(:primary) %>
+<% end %>
+
+<div class="space-y-2">
+  <% @check_ins.each do |c| %>
+    <%= link_to check_in_path(c), class: "flex items-center justify-between gap-4 p-4 rounded-xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-teal-400" do %>
+      <div>
+        <p class="text-sm font-medium"><%= t("check_ins.week", week: c.week_number) %></p>
+        <p class="text-xs text-zinc-500 line-clamp-1"><%= c.learned.presence || c.went_well %></p>
+      </div>
+      <div class="flex gap-1">
+        <% c.ratings.each do |key, v| %>
+          <% area = Area.find(key) or next %>
+          <span class="w-1.5 rounded-full <%= area_color(area) %>" style="height: <%= 4 + v.to_i * 2 %>px" title="<%= area.name %>: <%= v %>"></span>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @check_ins.empty? %><%= empty_state(t("check_ins.empty")) %><% end %>
+</div>

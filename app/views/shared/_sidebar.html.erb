@@ -1,0 +1,17 @@
+<%# Mobil: menyn fälls ut med <details>, inget JS behövs. %>
+<details class="lg:hidden border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group">
+  <summary class="flex items-center justify-between px-4 py-3 cursor-pointer list-none">
+    <%= link_to root_path, class: "flex items-center gap-2 font-semibold" do %><%= render "shared/logo" %> Lumia<% end %>
+    <span class="<%= ui_button(:icon) %>"><%= icon("menu") %></span>
+  </summary>
+  <div class="px-3 pb-4"><%= render "shared/nav" %></div>
+</details>
+
+<aside class="hidden lg:block w-60 shrink-0 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40">
+  <div class="sticky top-0 h-screen overflow-y-auto px-3 py-6">
+    <%= link_to root_path, class: "flex items-center gap-2 px-3 mb-6 text-lg font-semibold tracking-tight" do %>
+      <%= render "shared/logo" %> Lumia
+    <% end %>
+    <%= render "shared/nav" %>
+  </div>
+</aside>

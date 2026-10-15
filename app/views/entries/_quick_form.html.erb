@@ -1,0 +1,11 @@
+<%= form_with model: entry, class: "#{ui_surface(:card)} p-4", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } do |f| %>
+  <% Array(entry.area_keys).each do |key| %>
+    <%= hidden_field_tag "entry[area_keys][]", key, id: nil %>
+  <% end %>
+  <%= f.text_area :body, rows: 2, required: true, placeholder: t("entries.placeholder"),
+        class: "w-full resize-none bg-transparent text-base focus:outline-none placeholder:text-zinc-400" %>
+  <div class="flex items-center justify-between gap-3 mt-2">
+    <p class="text-xs text-zinc-500 dark:text-zinc-400"><%= t("entries.hint") %></p>
+    <%= f.submit t("entries.save"), class: ui_button(:primary) %>
+  </div>
+<% end %>

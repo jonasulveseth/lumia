@@ -1,0 +1,409 @@
+sv:
+  shared:
+    close: Stäng
+    see_all: Visa alla
+    all: Alla
+    save: Spara
+    add: Lägg till
+    edit: Redigera
+    delete: Ta bort
+    back: Tillbaka
+    refresh: Uppdatera
+    confirm_delete: Är du säker?
+  flash:
+    saved: Sparat.
+    deleted: Borttaget.
+  fields:
+    name: Namn
+    email: E-post
+    password: Lösenord
+    new_password: Nytt lösenord
+    password_confirmation: Bekräfta lösenord
+    birth_year: Födelseår
+    about_me: Om dig
+    coach_style: Hur vill du bli coachad?
+    locale: Språk
+    focus_goal: Fokusmål
+    current_state: Nuläge
+    title: Titel
+  nav:
+    today: Idag
+    coach: Coach
+    entries: Logg
+    check_ins: Veckoreflektion
+    experiments: Experiment
+    insights: Mönster
+    areas: Livsområden
+    manage_areas: Hantera områden
+    data: Data
+    measurements: Mätvärden
+    documents: Provsvar
+    memories: Vad Lumia vet
+    approaches: Ramverk & skolor
+    settings: Inställningar
+    sign_out: Logga ut
+  sessions:
+    title: Logga in
+    subtitle: Välkommen tillbaka till Lumia.
+    submit: Logga in
+    forgot: Glömt lösenordet?
+    invalid: Fel e-post eller lösenord.
+    rate_limited: För många försök. Vänta en stund och försök igen.
+  registrations:
+    title: Skapa konto
+    subtitle: Lumia är din personliga livscoach – för hela livet, inte bara en del av det.
+    submit: Kom igång
+    link: Skapa konto
+    have_account: Har du redan ett konto? Logga in
+    password_hint: Minst 8 tecken.
+  passwords:
+    forgot_title: Glömt lösenordet
+    edit_title: Välj nytt lösenord
+    send: Skicka återställningslänk
+    save: Spara lösenord
+    sent: Om adressen finns hos oss har vi skickat instruktioner.
+    reset: Lösenordet är bytt.
+    mismatch: Lösenorden matchade inte.
+    invalid_token: Länken är ogiltig eller har gått ut.
+    mail_subject: Återställ ditt lösenord
+    mail_link: den här sidan
+    mail_body_html: "Du kan välja ett nytt lösenord på %{link}. Länken gäller i 15 minuter."
+    mail_body_text: "Välj ett nytt lösenord här (gäller i 15 minuter):"
+  coach_styles:
+    gentle:
+      name: Varm och stöttande
+      description: Små steg, uppmuntran och tålamod.
+    direct:
+      name: Rak och utmanande
+      description: Ärlig återkoppling och tydliga åtaganden.
+    socratic:
+      name: Frågande
+      description: Bra frågor som hjälper dig hitta dina egna svar.
+    analytical:
+      name: Analytisk
+      description: Siffror, trender och mätbara experiment.
+  onboarding:
+    title: Kom igång
+    step: Steg %{n} av %{total}
+    next: Nästa
+    back: Tillbaka
+    finish: Klart – visa min översikt
+    done: Välkommen! Börja gärna med att skriva vad som händer just nu.
+    profile:
+      title: Berätta lite om dig
+      intro: Det här är grunden coachen utgår från. Du kan ändra allt senare.
+      about_placeholder: Vad är viktigt för dig just nu? Vad vill du ska vara annorlunda om ett år?
+    areas:
+      title: Dina livsområden
+      intro: Välj vilka områden du vill jobba med och skatta hur nöjd du är i dag. Ett fokusmål per område räcker – gärna litet.
+      rating: Hur nöjd är du
+      goal_placeholder: Till exempel "sova 7 timmar fyra nätter i veckan"
+    approaches:
+      title: Vad resonerar med dig?
+      intro: Det finns många skolor – inom kost, träning, mående och karriär. Lumia använder samma ramverk för alla, men innehållet anpassas efter vad du tror på. Markera det som känns rätt, det du är nyfiken på och det du inte vill ha.
+  dashboard:
+    greeting:
+      morning: God morgon %{name}
+      day: Hej %{name}
+      evening: God kväll %{name}
+    wheel: Livshjulet
+    wheel_empty: Aktivera minst tre livsområden för att se livshjulet.
+    update_ratings: Uppdatera
+    check_in_title: Veckans reflektion
+    check_in_done: Du har reflekterat den här veckan.
+    check_in_view: Visa reflektion
+    check_in_todo: Tio minuter för att se tillbaka på veckan och välja nästa lilla steg.
+    check_in_start: Gör veckans reflektion
+    experiments: Pågående experiment
+    no_experiments: Inget experiment pågår. Vad vill du testa?
+    insights: Mönster Lumia har sett
+    recent_entries: Senaste i loggen
+  entries:
+    title: Logg
+    subtitle: Skriv fritt. Lumia sorterar in det under rätt område, plockar ut mätvärden och lär sig vem du är.
+    placeholder: Vad händer? "Sov dåligt, 5 timmar. Stressigt möte. Promenad på lunchen kändes bra."
+    hint: Nämner du siffror (sömn, steg, humör 1–10) sparas de som mätvärden.
+    save: Spara
+    created: Sparat i loggen.
+    processing: Analyserar
+    from_chat: Från chatten
+    empty: Inget i loggen än.
+  areas:
+    title: Livsområden
+    subtitle: Strukturen är densamma för alla – nuläge, fokusmål och små experiment. Aktivera de områden du vill jobba med.
+    activate: Aktivera
+    deactivate: Pausa
+    rating: Nöjdhet
+    talk: Prata om %{area}
+    framework: Nuläge och fokus
+    current_state_placeholder: Hur ser det ut i dag, med dina egna ord?
+    focus_goal_placeholder: Vad vill du röra dig mot de närmaste veckorna?
+    log: Logg för området
+    metrics: Mätvärden
+    no_data: Ingen data
+    no_experiments: Inga experiment här än.
+    approaches: Ramverk för området
+    memories: Det Lumia vet här
+  approaches:
+    title: Ramverk & skolor
+    subtitle: Välj vad som resonerar med dig. Coachen följer det du valt, utforskar det du är nyfiken på och föreslår aldrig det du avvisat.
+    general: Beteendeförändring i stort
+    stance:
+      none: Neutral
+      resonates: Passar mig
+      curious: Nyfiken
+      rejected: Inte för mig
+  measurements:
+    title: Mätvärden
+    subtitle: Allt som går att mäta – från loggen, provsvar eller inmatat för hand.
+    metric: Mätvärde
+    value: Värde
+    when: När
+    add: Lägg till
+    latest: Senaste
+    trend: Trend
+    count: Antal
+    reference: Referens
+    source: Källa
+    from_entry: Loggen
+    manual: Manuellt
+    out_of_range: Utanför referens
+    too_few: Minst två värden behövs för en kurva.
+    empty: Inga mätvärden än. Logga sömn, humör eller ladda upp ett provsvar.
+  documents:
+    title: Provsvar
+    subtitle: Ladda upp provsvar och journalkopior. Lumia läser av värdena så att du kan följa dem över tid.
+    new: Ladda upp
+    new_intro: PDF eller text. Du kan också klistra in texten direkt från 1177 eller labbet.
+    title_placeholder: Till exempel "Blodprover hos vårdcentralen"
+    taken_on: Provdatum
+    kind: Typ
+    file: Fil
+    file_hint: PDF eller textfil. Bilder stöds inte än – klistra in texten i stället.
+    paste: Eller klistra in text
+    paste_placeholder: "Hb 142 g/L (134–170)\nLDL 3,9 mmol/L (<3,0)…"
+    privacy: Dokumentet analyseras av den AI-modell Lumia är konfigurerad med. Ladda bara upp det du är bekväm med.
+    analyze: Ladda upp och analysera
+    uploaded: Uppladdat. Analysen tar en liten stund.
+    reanalyze: Analysera igen
+    reanalyzing: Analyserar igen.
+    analyzing: Läser av dokumentet …
+    failed: Analysen misslyckades.
+    summary: Sammanfattning
+    not_medical_advice: Lumia är inte vård. Prata med din läkare om värden som oroar dig.
+    empty: Inga provsvar uppladdade än.
+    kinds:
+      lab_result: Provsvar
+      medical_record: Journalanteckning
+      other: Annat
+    status:
+      pending: Väntar
+      processing: Analyseras
+      done: Klar
+      failed: Misslyckades
+    errors:
+      no_text: Hittade ingen text i dokumentet.
+  check_ins:
+    title: Veckoreflektion
+    subtitle: Samma fyra frågor varje vecka. Över tid blir det här Lumias bästa källa till mönster.
+    start: Gör veckans reflektion
+    edit_this_week: Fortsätt veckans reflektion
+    new_title: Veckans reflektion
+    week: Vecka %{week}
+    ratings_title: Hur har veckan varit?
+    ratings_intro: Skatta varje område från 1 till 10. Magkänsla räcker.
+    energy: Energi
+    submit: Spara och få återkoppling
+    saved: Sparat. Coachen skriver en återkoppling.
+    coach_reply: Coachens återkoppling
+    coach_thinking: Coachen läser din vecka …
+    empty: Inga reflektioner än.
+    questions:
+      went_well: Vad gick bra?
+      challenges: Vad var svårt?
+      learned: Vad lärde du dig om dig själv?
+      next_focus: Vad vill du fokusera på nästa vecka?
+  experiments:
+    title: Experiment
+    subtitle: Vad testar jag nu – och vad lärde jag mig? Små, tidsbegränsade försök slår stora föresatser.
+    new: Nytt experiment
+    new_intro: Formulera det som ett test med ett slutdatum. Två veckor brukar vara lagom.
+    title_placeholder: Ingen skärm efter 22 i två veckor
+    hypothesis_placeholder: Om jag … så tror jag att …
+    general: Allmänt
+    evaluate: Utvärdera
+    learning_hint: Det du lär dig sparas i Lumias minne.
+    days_left:
+      zero: Sista dagen
+      one: 1 dag kvar
+      other: "%{count} dagar kvar"
+    created: Experimentet är igång. Lycka till!
+    empty_active: Inga pågående experiment.
+    empty_finished: Inga avslutade experiment än.
+    groups:
+      active: Pågående
+      finished: Avslutade
+    fields:
+      title: Vad testar du?
+      hypothesis: Hypotes
+      area: Område
+      approach: Ramverk
+      starts_on: Startar
+      ends_on: Slutar
+      status: Status
+      outcome: Vad hände?
+      learning: Vad lärde du dig?
+      success_rating: Utfall 1–10
+    status:
+      planned: Planerat
+      running: Pågår
+      completed: Klart
+      abandoned: Avbrutet
+  memories:
+    title: Vad Lumia vet om dig
+    subtitle: Allt coachen tror sig veta, på ett ställe. Rätta, fäst det viktigaste eller be Lumia glömma.
+    add_label: Lägg till något Lumia ska veta
+    add_placeholder: Jag tränar bäst på morgonen
+    category: Kategori
+    pin: Fäst
+    forget: Glöm
+    forgotten: Lumia har glömt det.
+    empty: Lumia vet inget om dig än. Skriv i loggen eller prata med coachen.
+    categories:
+      fact: Fakta
+      preference: Preferens
+      value: Värdering
+      goal: Mål
+      health: Hälsa
+      pattern: Mönster
+      learning: Lärdom
+    sources:
+      ai: Lärt av Lumia
+      user: Tillagt av dig
+      experiment: Från experiment
+  insights:
+    title: Mönster
+    subtitle: Samband tvärs över dina livsområden. Lumia letar varje måndag, eller när du ber om det.
+    generate: Leta mönster nu
+    generating: Lumia letar mönster. Sidan uppdateras när det är klart.
+    evidence: Vad bygger det på?
+    test: Testa som experiment
+    useful: Användbart
+    dismiss: Inte relevant
+    empty: Inga mönster än. Ju mer du loggar och reflekterar, desto mer ser Lumia.
+    kinds:
+      pattern: Mönster
+      correlation: Samband
+      suggestion: Förslag
+  coach:
+    title: Coach
+    subtitle: Prata om vad som helst. Coachen känner dina områden, ramverk, experiment och mätvärden.
+    new: Nytt samtal
+    placeholder: Vad har du på hjärtat?
+    reply_placeholder: Skriv ett svar … (Enter skickar, Shift+Enter ny rad)
+    send: Skicka
+    all_areas: Alla områden
+    thinking: Tänker …
+    empty_conversation: Samtalet är tomt.
+    error: Coachen kunde inte svara just nu. Försök igen om en stund.
+    starters:
+      - Varför är jag så trött på eftermiddagarna?
+      - Hjälp mig välja ett experiment för den här veckan
+      - Vad säger mina provsvar?
+      - Jag vill komma igång med träning igen
+  settings:
+    title: Inställningar
+  lumia:
+    areas:
+      health:
+        name: Hälsa & kropp
+        description: Sömn, rörelse, återhämtning och det dina provsvar säger.
+        topics: [Sömn, Rörelse, Återhämtning, Provsvar]
+      nutrition:
+        name: Kost
+        description: Vad du äter, hur det får dig att må och vilken kostfilosofi som passar dig.
+        topics: [Måltider, Kostfilosofi, Vanor, Dryck]
+      mind:
+        name: Sinne & mående
+        description: Humör, stress, energi och de mentala verktyg som hjälper dig.
+        topics: [Humör, Stress, Energi, Mental träning]
+      relationships:
+        name: Relationer
+        description: Partner, familj, vänner och de sammanhang du hör hemma i.
+        topics: [Partner, Familj, Vänner, Gemenskap]
+      career:
+        name: Karriär & arbete
+        description: Mål, färdigheter, projekt och hur arbetet känns.
+        topics: [Mål, Färdigheter, Projekt, Återkoppling]
+      learning:
+        name: Lärande
+        description: Det du vill förstå eller kunna – böcker, kurser, hantverk.
+        topics: [Läsning, Kurser, Färdigheter, Nyfikenhet]
+      finance:
+        name: Ekonomi
+        description: Buffert, sparande och att pengarna går till det du värderar.
+        topics: [Buffert, Sparande, Utgifter, Mål]
+      meaning:
+        name: Mening & värderingar
+        description: Vad som är viktigt för dig och om livet rör sig åt det hållet.
+        topics: [Värderingar, Syfte, Bidrag, Reflektion]
+    approaches:
+      mediterranean: { name: Medelhavskost, description: "Grönsaker, baljväxter, olivolja, fisk och nötter. Lite rött kött och ultraprocessat." }
+      low_carb: { name: Lågkolhydrat / LCHF, description: "Mindre socker och stärkelse, mer protein, fett och gröna grönsaker – i Atkins anda." }
+      plant_based: { name: Växtbaserat, description: "Mest eller enbart växter, med koll på protein, B12, järn och omega-3." }
+      intermittent_fasting: { name: Periodisk fasta, description: "Ett kortare ätfönster, till exempel 16:8." }
+      flexible_counting: { name: Flexibel kost, description: "Inget förbjudet, men koll på protein och energi över tid." }
+      nordic: { name: Nordisk kost, description: "Säsong, rotfrukter, bär, råg, fisk och rapsolja." }
+      longevity_training: { name: Träning för livslängd, description: "Mycket lugn kondition (zon 2), lite intervaller, styrka och balans." }
+      strength_first: { name: Styrka först, description: "Progressiv styrketräning 2–4 gånger i veckan, med protein och sömn som stöd." }
+      sleep_first: { name: Sömnen först, description: "Regelbundna tider, morgonljus och sömnen som grunden för allt annat." }
+      daily_movement: { name: Vardagsrörelse, description: "Promenader, trappor och korta pauser från stillasittande." }
+      stoicism: { name: Stoicism, description: "Skilj på det du kan och inte kan påverka. Daglig reflektion." }
+      mindfulness: { name: Mindfulness, description: "Regelbunden närvaroträning – kort och ofta." }
+      cbt_tools: { name: KBT-verktyg, description: "Upptäck automatiska tankar, pröva dem och ta små steg. Ersätter inte terapi." }
+      act: { name: ACT, description: "Acceptera svåra känslor och agera i riktning mot dina värderingar." }
+      gottman: { name: Gottman-metoden, description: "Vänd dig mot varandras inviter, mjuka uppstarter och reparationsförsök." }
+      nonviolent_communication: { name: Nonviolent Communication, description: "Observation, känsla, behov och konkret önskan." }
+      attachment_aware: { name: Anknytningsmedveten, description: "Förstå egna och andras anknytningsmönster." }
+      deep_work: { name: Deep Work, description: "Skydda långa block av ostört fokus." }
+      ikigai: { name: Ikigai, description: "Där det du älskar, är bra på, världen behöver och du kan få betalt för möts." }
+      design_your_life: { name: Designing Your Life, description: "Prototypa karriärval med samtal och små experiment." }
+      career_capital: { name: Karriärkapital, description: "Bygg sällsynta, värdefulla färdigheter först – passionen följer." }
+      spaced_repetition: { name: Repetition med mellanrum, description: "Testa dig själv i stället för att läsa om." }
+      learning_by_doing: { name: Lära genom att göra, description: "Projekt strax över din nivå, snabb återkoppling." }
+      feynman: { name: Feynman-tekniken, description: "Förklara enkelt, hitta luckorna, gå tillbaka till källan." }
+      buffer_first: { name: Buffert först, description: "Några månaders buffert och bort med dyra lån innan något annat." }
+      index_investing: { name: Indexsparande, description: "Billiga breda fonder, automatiskt månadssparande, lång horisont." }
+      fire: { name: FIRE, description: "Hög sparkvot och lägre fasta kostnader mot ekonomiskt oberoende." }
+      values_based_spending: { name: Värderingsstyrda utgifter, description: "Generöst på det du värderar, snålt på resten." }
+      values_compass: { name: Värderingskompass, description: "Namnge dina värderingar och se varje vecka om tiden matchar." }
+      logotherapy: { name: Logoterapi (Frankl), description: "Mening genom att skapa, älska och möta det oundvikliga." }
+      contribution: { name: Att bidra, description: "Mening genom att hjälpa andra och höra till något större." }
+      atomic_habits: { name: Atomic Habits, description: "Gör det tydligt, lockande, enkelt och tillfredsställande. Identitet före mål." }
+      tiny_habits: { name: Tiny Habits, description: "Knyt en pytteliten vana till något du redan gör och fira direkt." }
+      implementation_intentions: { name: Om-då-planer, description: "\"När X händer gör jag Y\" – konkreta planer för när och var." }
+    metrics:
+      sleep_hours: Sömn
+      sleep_quality: Sömnkvalitet
+      steps: Steg
+      workout_minutes: Träning
+      weight: Vikt
+      resting_hr: Vilopuls
+      alcohol_units: Alkohol
+      water_liters: Vatten
+      mood: Humör
+      energy: Energi
+      stress: Stress
+      meditation_minutes: Meditation
+      social_hours: Social tid
+      focus_hours: Fokustid
+      work_hours: Arbetstid
+      reading_minutes: Läsning
+      savings_rate: Sparkvot
+  activerecord:
+    errors:
+      models:
+        document:
+          attributes:
+            base:
+              file_or_text_missing: Ladda upp en fil eller klistra in text.

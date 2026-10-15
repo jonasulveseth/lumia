@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" class="h-full">
+  <head>
+    <title><%= [content_for(:title), "Lumia"].compact.join(" · ") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Lumia">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="turbo-refresh-method" content="morph">
+    <meta name="turbo-refresh-scroll" content="preserve">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased" data-controller="icons">
+    <% if authenticated? && current_user.onboarded? %>
+      <div class="lg:flex min-h-full">
+        <%= render "shared/sidebar" %>
+        <main class="flex-1 min-w-0 px-4 sm:px-8 py-6 lg:py-10">
+          <div class="max-w-5xl mx-auto">
+            <%= render "shared/flash" %>
+            <%= yield %>
+          </div>
+        </main>
+      </div>
+    <% else %>
+      <main class="min-h-full flex flex-col items-center justify-center px-4 py-10">
+        <div class="mb-8 flex items-center gap-2 text-xl font-semibold tracking-tight">
+          <%= render "shared/logo" %> Lumia
+        </div>
+        <div class="w-full <%= content_for?(:wide) ? "max-w-3xl" : "max-w-md" %>">
+          <%= render "shared/flash" %>
+          <%= yield %>
+        </div>
+      </main>
+    <% end %>
+  </body>
+</html>

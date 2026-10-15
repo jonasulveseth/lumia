@@ -1,0 +1,8 @@
+<% { notice: :info, alert: :error }.each do |key, variant| %>
+  <% if flash[key].present? %>
+    <div class="<%= ui_notice(variant) %> mb-4" data-controller="flash" role="status">
+      <span class="flex-1"><%= flash[key] %></span>
+      <button type="button" class="<%= ui_button(:ghost) %> py-0" data-action="flash#dismiss" aria-label="<%= t("shared.close") %>"><%= icon("x") %></button>
+    </div>
+  <% end %>
+<% end %>

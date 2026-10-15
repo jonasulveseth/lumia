@@ -1,0 +1,10 @@
+<div class="<%= ui_surface(:card) %>">
+  <h1 class="text-xl font-semibold mb-6"><%= t("passwords.forgot_title") %></h1>
+  <%= form_with url: passwords_path, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :email_address, t("fields.email"), class: ui_field(:label) %>
+      <%= f.email_field :email_address, required: true, autofocus: true, class: ui_field(:input) %>
+    </div>
+    <%= f.submit t("passwords.send"), class: "#{ui_button(:primary)} w-full" %>
+  <% end %>
+</div>

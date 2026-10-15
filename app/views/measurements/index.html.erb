@@ -1,0 +1,48 @@
+<% content_for :title, t("nav.measurements") %>
+<%= page_header(t("measurements.title"), t("measurements.subtitle")) %>
+
+<%= form_with model: @measurement, class: "#{ui_surface(:card)} p-4 grid sm:grid-cols-[1fr_140px_200px_auto] gap-3 items-end mb-6" do |f| %>
+  <div>
+    <%= f.label :metric_key, t("measurements.metric"), class: ui_field(:label) %>
+    <%= f.select :metric_key, Metric.all.map { ["#{_1.name} (#{_1.unit})", _1.key] }, {}, class: ui_field(:input) %>
+  </div>
+  <div>
+    <%= f.label :value, t("measurements.value"), class: ui_field(:label) %>
+    <%= f.number_field :value, step: "any", required: true, class: ui_field(:input) %>
+  </div>
+  <div>
+    <%= f.label :measured_at, t("measurements.when"), class: ui_field(:label) %>
+    <%= f.datetime_local_field :measured_at, class: ui_field(:input) %>
+  </div>
+  <%= f.submit t("measurements.add"), class: ui_button(:primary) %>
+<% end %>
+
+<% if @summaries.any? %>
+  <div class="overflow-x-auto <%= ui_surface(:card) %> p-0">
+    <table class="w-full">
+      <thead><tr class="<%= ui_table(:row) %>">
+        <th class="<%= ui_table(:header) %>"><%= t("measurements.metric") %></th>
+        <th class="<%= ui_table(:header) %>"><%= t("measurements.latest") %></th>
+        <th class="<%= ui_table(:header) %>"><%= t("measurements.trend") %></th>
+        <th class="<%= ui_table(:header) %>"><%= t("measurements.count") %></th>
+      </tr></thead>
+      <tbody>
+        <% @summaries.each do |key, count, _last| %>
+          <% series = current_user.measurements.where(metric_key: key).chronological.last(30) %>
+          <% latest = series.last %>
+          <tr class="<%= ui_table(:row) %>">
+            <td class="<%= ui_table(:cell) %>"><%= link_to latest.display_label, measurement_path(key), class: "font-medium hover:underline" %></td>
+            <td class="<%= ui_table(:cell) %> whitespace-nowrap">
+              <%= number_display(latest.value) %> <%= latest.unit %>
+              <% if latest.out_of_range? %><span class="<%= ui_badge(:bad) %>"><%= t("measurements.out_of_range") %></span><% end %>
+            </td>
+            <td class="<%= ui_table(:cell) %>"><%= sparkline(series.map(&:value), width: 100, height: 24) %></td>
+            <td class="<%= ui_table(:cell) %> text-zinc-500"><%= count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <%= empty_state(t("measurements.empty")) %>
+<% end %>

@@ -1,0 +1,12 @@
+# Lumia
+
+En holistisk livscoach byggd på Rails 8. Se `docs/overview.md` för konceptet och `CLAUDE.md` för arkitekturen.
+
+```
+bundle install
+bin/rails db:prepare db:seed
+bin/dev            # http://localhost:3077
+bin/rails test
+```
+
+Kräver PostgreSQL och en språkmodell: lokal Ollama (`.env.example`) eller en `AiProvider` i databasen.

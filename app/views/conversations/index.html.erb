@@ -1,0 +1,18 @@
+<% content_for :title, t("nav.coach") %>
+<%= page_header(t("coach.title"), t("coach.subtitle")) %>
+
+<div class="grid lg:grid-cols-[220px_1fr] gap-6">
+  <div class="hidden lg:block"><%= render "conversations/sidebar", conversations: @conversations %></div>
+  <%= form_with model: @conversation, class: "#{ui_surface(:card)} space-y-4" do |f| %>
+    <%= f.text_area :message, rows: 4, required: true, autofocus: true, placeholder: t("coach.placeholder"), class: ui_field(:input) %>
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <%= f.select :area_key, Area.all.map { [_1.name, _1.key] }, { include_blank: t("coach.all_areas") }, class: "#{ui_field(:input)} w-auto" %>
+      <%= f.submit t("coach.send"), class: ui_button(:primary) %>
+    </div>
+    <div class="flex flex-wrap gap-1.5 pt-2">
+      <% t("coach.starters").each do |starter| %>
+        <span class="<%= ui_badge(:neutral) %> text-xs"><%= starter %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

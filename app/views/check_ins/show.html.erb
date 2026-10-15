@@ -1,0 +1,31 @@
+<% content_for :title, t("check_ins.week", week: @check_in.week_number) %>
+<%= turbo_stream_from current_user, :check_ins %>
+<%= page_header(t("check_ins.week", week: @check_in.week_number), l(@check_in.week_start, format: :long)) { link_to t("shared.edit"), edit_check_in_path(@check_in), class: ui_button(:secondary) } %>
+
+<div class="grid lg:grid-cols-2 gap-6">
+  <div class="space-y-6">
+    <section class="<%= ui_surface(:card) %>">
+      <div class="space-y-2">
+        <% @check_in.ratings.each do |key, value| %>
+          <% area = Area.find(key) or next %>
+          <div class="flex items-center gap-3 text-sm">
+            <span class="w-32 truncate"><%= area.name %></span>
+            <div class="flex-1 h-2 rounded-full bg-zinc-100 dark:bg-zinc-800"><div class="h-2 rounded-full <%= area_color(area) %>" style="width: <%= value.to_i * 10 %>%"></div></div>
+            <span class="w-6 text-right font-medium"><%= value %></span>
+          </div>
+        <% end %>
+        <% if @check_in.energy %><p class="text-sm pt-2"><%= t("check_ins.energy") %>: <strong><%= @check_in.energy %>/10</strong></p><% end %>
+      </div>
+    </section>
+    <section class="<%= ui_surface(:card) %> space-y-4">
+      <% %i[went_well challenges learned next_focus].each do |field| %>
+        <% next if @check_in.send(field).blank? %>
+        <div>
+          <p class="text-xs font-medium text-zinc-500 uppercase tracking-wide"><%= t("check_ins.questions.#{field}") %></p>
+          <p class="text-sm mt-1 whitespace-pre-line"><%= @check_in.send(field) %></p>
+        </div>
+      <% end %>
+    </section>
+  </div>
+  <%= render "check_ins/coach_reply", check_in: @check_in %>
+</div>

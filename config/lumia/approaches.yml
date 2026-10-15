@@ -1,0 +1,106 @@
+# Skolor, strategier och ramverk som användaren kan välja att luta sig mot.
+# Namn/beskrivning visas via locales (lumia.approaches.*). "principles" går till
+# AI:n och är därför på engelska och kort.
+# area: nil betyder att ramverket gäller beteendeförändring i stort.
+mediterranean:
+  area: nutrition
+  principles: "Mediterranean diet: vegetables, legumes, whole grains, olive oil, fish, nuts; little red meat and ultra-processed food; meals as social rituals."
+low_carb:
+  area: nutrition
+  principles: "Low carb / LCHF / Atkins-style: minimise sugar and starch, prioritise protein, fat and non-starchy vegetables; track how energy and hunger respond."
+plant_based:
+  area: nutrition
+  principles: "Plant-based: mostly or only plant foods; ensure protein variety, B12, iron, omega-3; focus on whole foods over substitutes."
+intermittent_fasting:
+  area: nutrition
+  principles: "Intermittent fasting / time-restricted eating: compress the eating window (e.g. 16:8); watch sleep, training and social meals."
+flexible_counting:
+  area: nutrition
+  principles: "Flexible dieting: no forbidden foods; track protein and total energy against a goal; consistency over perfection."
+nordic:
+  area: nutrition
+  principles: "Nordic diet: seasonal local produce, root vegetables, berries, whole-grain rye, fish, rapeseed oil; less meat, more plants."
+longevity_training:
+  area: health
+  principles: "Longevity-oriented training: zone 2 cardio volume, some VO2max intervals, strength training and stability; measure progress over years."
+strength_first:
+  area: health
+  principles: "Strength first: progressive overload 2–4 times a week on big compound lifts; protein and sleep support recovery."
+sleep_first:
+  area: health
+  principles: "Sleep first: protect a consistent sleep window, morning light, caffeine cut-off, dark cool bedroom; treat sleep as the foundation for everything else."
+daily_movement:
+  area: health
+  principles: "Daily movement: walk, take the stairs, break up sitting; small non-exercise activity adds up more than occasional hard sessions."
+stoicism:
+  area: mind
+  principles: "Stoicism: separate what you control from what you don't; judge impressions; daily reflection; virtue (wisdom, courage, justice, temperance) as the goal."
+mindfulness:
+  area: mind
+  principles: "Mindfulness: regular attention training, noticing thoughts and feelings without judgment; short daily practice over long rare sessions."
+cbt_tools:
+  area: mind
+  principles: "CBT tools: notice automatic thoughts, test them against evidence, behavioural activation, exposure in small steps. Not therapy – refer to professionals when needed."
+act:
+  area: mind
+  principles: "ACT (Acceptance and Commitment): accept difficult feelings, defuse from thoughts, clarify values and take committed action towards them."
+gottman:
+  area: relationships
+  principles: "Gottman: turn towards bids for connection, 5:1 positive-to-negative ratio, soft start-ups, repair attempts, avoid criticism/contempt/defensiveness/stonewalling."
+nonviolent_communication:
+  area: relationships
+  principles: "Nonviolent Communication: observations without evaluation, feelings, needs, concrete requests."
+attachment_aware:
+  area: relationships
+  principles: "Attachment-aware: understand your own and others' attachment patterns and respond to needs for safety and closeness."
+deep_work:
+  area: career
+  principles: "Deep work: protect long blocks of undistracted focus, batch shallow work, measure output rather than hours."
+ikigai:
+  area: career
+  principles: "Ikigai: look for the overlap between what you love, what you are good at, what the world needs and what you can be paid for."
+design_your_life:
+  area: career
+  principles: "Designing Your Life: prototype careers with conversations and small experiments, build several odyssey plans, follow energy and engagement."
+career_capital:
+  area: career
+  principles: "Career capital: build rare and valuable skills first; passion follows mastery; trade capital for autonomy and meaning."
+spaced_repetition:
+  area: learning
+  principles: "Spaced repetition and retrieval practice: test yourself rather than re-read, review at increasing intervals."
+learning_by_doing:
+  area: learning
+  principles: "Learning by doing: pick projects slightly beyond current skill, ship small things, get feedback fast."
+feynman:
+  area: learning
+  principles: "Feynman technique: explain the topic simply as if to a beginner, find gaps, go back to the source, simplify again."
+buffer_first:
+  area: finance
+  principles: "Buffer first: build an emergency fund of a few months of expenses before optimising anything else; pay off expensive debt."
+index_investing:
+  area: finance
+  principles: "Index investing: low-cost broad index funds, automatic monthly saving, long horizon, ignore noise."
+fire:
+  area: finance
+  principles: "FIRE: high savings rate, lower fixed costs, aim for financial independence; trade-offs are explicit."
+values_based_spending:
+  area: finance
+  principles: "Values-based spending: spend generously on what you truly value, cut mercilessly on what you don't."
+values_compass:
+  area: meaning
+  principles: "Values compass: name your core values, check weekly whether your time matches them, adjust."
+logotherapy:
+  area: meaning
+  principles: "Logotherapy (Frankl): meaning through creating something, experiencing/loving someone, and the attitude taken towards unavoidable suffering."
+contribution:
+  area: meaning
+  principles: "Contribution: meaning grows from helping others and belonging to something larger – volunteering, mentoring, community."
+atomic_habits:
+  area:
+  principles: "Atomic Habits: make it obvious, attractive, easy and satisfying; identity-based habits; 1% improvements; environment design."
+tiny_habits:
+  area:
+  principles: "Tiny Habits (BJ Fogg): anchor a tiny behaviour to an existing routine, celebrate immediately, grow it later."
+implementation_intentions:
+  area:
+  principles: "Implementation intentions: 'When X happens, I will do Y' – concrete if-then plans for when and where."

@@ -1,0 +1,19 @@
+# Kända mätvärden. Provsvar som inte finns här sparas ändå, med eget
+# namn (label) och enhet från provsvaret. better: higher, lower eller range.
+sleep_hours:        { area: health,        unit: h,     min: 0, max: 14,    better: range, target: [7, 9] }
+sleep_quality:      { area: health,        unit: "/10", min: 1, max: 10,  better: higher }
+steps:              { area: health,        unit: steg,  min: 0, max: 60000, better: higher }
+workout_minutes:    { area: health,        unit: min,   min: 0, max: 600,   better: higher }
+weight:             { area: health,        unit: kg,    min: 20, max: 400,  better: range }
+resting_hr:         { area: health,        unit: bpm,   min: 25, max: 150,  better: lower }
+alcohol_units:      { area: nutrition,     unit: st,    min: 0, max: 50,    better: lower }
+water_liters:       { area: nutrition,     unit: l,     min: 0, max: 10,    better: range, target: [1.5, 3] }
+mood:               { area: mind,          unit: "/10", min: 1, max: 10,  better: higher }
+energy:             { area: mind,          unit: "/10", min: 1, max: 10,  better: higher }
+stress:             { area: mind,          unit: "/10", min: 1, max: 10,  better: lower }
+meditation_minutes: { area: mind,          unit: min,   min: 0, max: 300,   better: higher }
+social_hours:       { area: relationships, unit: h,     min: 0, max: 24,    better: higher }
+focus_hours:        { area: career,        unit: h,     min: 0, max: 16,    better: higher }
+work_hours:         { area: career,        unit: h,     min: 0, max: 24,    better: range }
+reading_minutes:    { area: learning,      unit: min,   min: 0, max: 600,   better: higher }
+savings_rate:       { area: finance,       unit: "%",   min: -100, max: 100, better: higher }

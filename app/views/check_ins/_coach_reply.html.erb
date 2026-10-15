@@ -1,0 +1,8 @@
+<section id="coach_reply" class="<%= ui_surface(:card) %> border-teal-200 dark:border-teal-500/30">
+  <h2 class="font-semibold mb-2 flex items-center gap-2"><%= icon("sparkles", css: "w-4 h-4 text-teal-600") %><%= t("check_ins.coach_reply") %></h2>
+  <% if check_in.coach_reply.present? %>
+    <div class="prose-lumia"><%= markdown(check_in.coach_reply) %></div>
+  <% else %>
+    <p class="text-sm text-zinc-500 flex items-center gap-2"><%= icon("loader-circle", css: "w-4 h-4 animate-spin") %><%= t("check_ins.coach_thinking") %></p>
+  <% end %>
+</section>

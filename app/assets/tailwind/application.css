@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* Markdown från coachen och AI-sammanfattningar. */
+.prose-lumia {
+  @apply text-sm leading-relaxed;
+  & p { @apply my-2 first:mt-0 last:mb-0; }
+  & ul { @apply list-disc pl-5 my-2 space-y-1; }
+  & ol { @apply list-decimal pl-5 my-2 space-y-1; }
+  & strong { @apply font-semibold; }
+  & h1, & h2, & h3 { @apply font-semibold mt-3 mb-1; }
+  & a { @apply text-teal-600 dark:text-teal-400 underline; }
+}

@@ -1,0 +1,28 @@
+<% content_for :title, "Style guide" %>
+<%= page_header("Style guide", "app/helpers/style_guide_helper.rb") %>
+
+<div class="space-y-8">
+  <section class="<%= ui_surface(:card) %>">
+    <h2 class="font-semibold mb-4">ui_button</h2>
+    <div class="flex flex-wrap gap-3 items-center">
+      <% StyleGuideHelper::BUTTON.each_key do |variant| %>
+        <button class="<%= ui_button(variant) %>"><%= variant == :icon || variant == :icon_active ? icon("pin") : variant %></button>
+      <% end %>
+    </div>
+  </section>
+  <section class="<%= ui_surface(:card) %>">
+    <h2 class="font-semibold mb-4">ui_badge / ui_notice</h2>
+    <div class="flex flex-wrap gap-2 mb-4"><% StyleGuideHelper::BADGE.each_key do |v| %><span class="<%= ui_badge(v) %>"><%= v %></span><% end %></div>
+    <div class="space-y-2"><% StyleGuideHelper::NOTICE.each_key do |v| %><div class="<%= ui_notice(v) %>"><%= v %></div><% end %></div>
+  </section>
+  <section class="<%= ui_surface(:card) %>">
+    <h2 class="font-semibold mb-4">ui_field</h2>
+    <label class="<%= ui_field(:label) %>">Label</label>
+    <input class="<%= ui_field(:input) %>" placeholder="Input">
+    <p class="<%= ui_field(:hint) %>">Hint</p>
+  </section>
+  <section class="<%= ui_surface(:card) %>">
+    <h2 class="font-semibold mb-4">Areas</h2>
+    <div class="flex flex-wrap gap-2"><% Area.all.each do |a| %><%= area_badge(a) %><% end %></div>
+  </section>
+</div>

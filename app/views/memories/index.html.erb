@@ -1,0 +1,41 @@
+<% content_for :title, t("nav.memories") %>
+<%= page_header(t("memories.title"), t("memories.subtitle")) %>
+
+<%= form_with model: @memory, class: "#{ui_surface(:card)} p-4 grid sm:grid-cols-[1fr_160px_160px_auto] gap-3 items-end mb-6" do |f| %>
+  <div>
+    <%= f.label :content, t("memories.add_label"), class: ui_field(:label) %>
+    <%= f.text_field :content, required: true, placeholder: t("memories.add_placeholder"), class: ui_field(:input) %>
+  </div>
+  <div>
+    <%= f.label :category, t("memories.category"), class: ui_field(:label) %>
+    <%= f.select :category, Memory::CATEGORIES.map { [t("memories.categories.#{_1}"), _1] }, {}, class: ui_field(:input) %>
+  </div>
+  <div>
+    <%= f.label :area_key, t("experiments.fields.area"), class: ui_field(:label) %>
+    <%= f.select :area_key, Area.all.map { [_1.name, _1.key] }, { include_blank: "–" }, class: ui_field(:input) %>
+  </div>
+  <%= f.submit t("shared.add"), class: ui_button(:primary) %>
+<% end %>
+
+<% if @memories.any? %>
+  <div class="space-y-2">
+    <% @memories.each do |m| %>
+      <div class="group flex items-start gap-3 p-3 rounded-xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
+        <%= button_to memory_path(m), method: :patch, params: { memory: { pinned: !m.pinned } }, class: m.pinned ? ui_button(:icon_active) : ui_button(:icon), title: t("memories.pin") do %>
+          <%= icon("pin", css: "w-3.5 h-3.5") %>
+        <% end %>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm"><%= m.content %></p>
+          <div class="flex flex-wrap items-center gap-1.5 mt-1">
+            <span class="<%= ui_badge(:neutral) %>"><%= t("memories.categories.#{m.category}") %></span>
+            <%= area_badge(m.area_key) if m.area_key %>
+            <span class="text-[11px] text-zinc-400"><%= t("memories.sources.#{m.source}") %> · <%= l(m.created_at.to_date) %></span>
+          </div>
+        </div>
+        <%= button_to memory_path(m), method: :delete, class: "#{ui_button(:ghost)} opacity-0 group-hover:opacity-100", title: t("memories.forget") do %><%= icon("x") %><% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <%= empty_state(t("memories.empty")) %>
+<% end %>

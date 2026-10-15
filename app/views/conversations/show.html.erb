@@ -1,0 +1,30 @@
+<% content_for :title, @conversation.display_title %>
+<%= turbo_stream_from @conversation %>
+
+<div class="grid lg:grid-cols-[220px_1fr] gap-6">
+  <div class="hidden lg:block"><%= render "conversations/sidebar", conversations: @conversations, current: @conversation %></div>
+
+  <div class="flex flex-col h-[calc(100vh-8rem)] min-h-[420px]" data-controller="chat">
+    <div class="flex items-center justify-between gap-3 mb-3">
+      <div class="flex items-center gap-2 min-w-0">
+        <h1 class="font-semibold truncate"><%= @conversation.display_title %></h1>
+        <%= area_badge(@conversation.area_key) if @conversation.area_key %>
+      </div>
+      <%= button_to conversation_path(@conversation), method: :delete, class: ui_button(:ghost), form: { data: { turbo_confirm: t("shared.confirm_delete") } }, title: t("shared.delete") do %><%= icon("trash-2") %><% end %>
+    </div>
+
+    <div id="messages" class="flex-1 overflow-y-auto space-y-4 pr-1" data-chat-target="messages">
+      <%= render @conversation.messages %>
+      <% if @conversation.messages.empty? %>
+        <p class="text-sm text-zinc-500 italic"><%= t("coach.empty_conversation") %></p>
+      <% end %>
+    </div>
+
+    <%= form_with model: [@conversation, Message.new], class: "mt-4 flex items-end gap-2",
+          data: { chat_target: "form", action: "turbo:submit-end->chat#reset" } do |f| %>
+      <%= f.text_area :content, rows: 2, required: true, placeholder: t("coach.reply_placeholder"),
+            class: "#{ui_field(:input)} resize-none", data: { chat_target: "input", action: "keydown->chat#keydown" } %>
+      <%= f.button class: ui_button(:primary), title: t("coach.send") do %><%= icon("send") %><% end %>
+    <% end %>
+  </div>
+</div>

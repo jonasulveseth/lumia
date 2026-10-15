@@ -1,0 +1,105 @@
+<% content_for :title, t("nav.today") %>
+<%= turbo_stream_from current_user, :entries %>
+
+<div class="mb-8">
+  <p class="text-sm text-zinc-500 dark:text-zinc-400"><%= l(Date.current, format: :long) %></p>
+  <h1 class="text-2xl sm:text-3xl font-semibold mt-1"><%= t("dashboard.greeting.#{Time.current.hour < 10 ? "morning" : Time.current.hour < 17 ? "day" : "evening"}", name: current_user.first_name || "") %></h1>
+</div>
+
+<%= render "entries/quick_form", entry: @entry %>
+
+<div class="grid lg:grid-cols-5 gap-6 mt-6">
+  <section class="lg:col-span-3 <%= ui_surface(:card) %>">
+    <div class="flex items-center justify-between mb-2">
+      <h2 class="font-semibold"><%= t("dashboard.wheel") %></h2>
+      <%= link_to t("dashboard.update_ratings"), @check_in ? edit_check_in_path(@check_in) : new_check_in_path, class: ui_button(:ghost) %>
+    </div>
+    <% if @life_areas.size >= 3 %>
+      <%= life_wheel(@life_areas) %>
+    <% else %>
+      <%= empty_state(t("dashboard.wheel_empty")) %>
+    <% end %>
+    <div class="mt-4 grid sm:grid-cols-2 gap-2">
+      <% @life_areas.select { _1.focus_goal.present? }.first(4).each do |la| %>
+        <%= link_to area_path(la), class: "block p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50" do %>
+          <span class="text-xs <%= area_color(la.area, :text) %> font-medium"><%= la.name %></span>
+          <span class="block text-sm text-zinc-700 dark:text-zinc-300 line-clamp-2"><%= la.focus_goal %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <div class="lg:col-span-2 space-y-6">
+    <section class="<%= ui_surface(:card) %>">
+      <div class="flex items-center gap-2 mb-2"><%= icon("calendar-check", css: "w-5 h-5 text-teal-600") %><h2 class="font-semibold"><%= t("dashboard.check_in_title") %></h2></div>
+      <% if @check_in %>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400"><%= t("dashboard.check_in_done") %></p>
+        <%= link_to t("dashboard.check_in_view"), check_in_path(@check_in), class: "#{ui_button(:secondary)} mt-3" %>
+      <% else %>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400"><%= t("dashboard.check_in_todo") %></p>
+        <%= link_to t("dashboard.check_in_start"), new_check_in_path, class: "#{ui_button(:primary)} mt-3" %>
+      <% end %>
+    </section>
+
+    <section class="<%= ui_surface(:card) %>">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="font-semibold"><%= t("dashboard.experiments") %></h2>
+        <%= link_to icon("plus"), new_experiment_path, class: ui_button(:icon), title: t("experiments.new") %>
+      </div>
+      <% if @experiments.any? %>
+        <ul class="space-y-3">
+          <% @experiments.each do |e| %>
+            <li>
+              <%= link_to edit_experiment_path(e), class: "block" do %>
+                <span class="text-sm font-medium"><%= e.title %></span>
+                <span class="block text-xs text-zinc-500"><%= e.area&.name %><%= " · #{t("experiments.days_left", count: e.days_left)}" if e.days_left %></span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <%= empty_state(t("dashboard.no_experiments")) %>
+      <% end %>
+    </section>
+  </div>
+</div>
+
+<% if @insights.any? %>
+  <section class="mt-6">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="font-semibold flex items-center gap-2"><%= icon("sparkles", css: "w-4 h-4 text-teal-600") %><%= t("dashboard.insights") %></h2>
+      <%= link_to t("shared.see_all"), insights_path, class: ui_button(:ghost) %>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <% @insights.each do |insight| %>
+        <div class="<%= ui_surface(:panel) %>">
+          <p class="text-sm font-medium"><%= insight.title %></p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1 line-clamp-4"><%= insight.body %></p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+
+<% if @trend_metrics.any? %>
+  <section class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <% @trend_metrics.each do |key| %>
+      <% series = Measurement.series(current_user, key, since: 30.days.ago).to_a %>
+      <%= link_to measurement_path(key), class: "#{ui_surface(:panel)} block hover:border-teal-400" do %>
+        <p class="text-xs text-zinc-500"><%= series.last.display_label %></p>
+        <p class="text-lg font-semibold"><%= number_display(series.last.value) %> <span class="text-xs font-normal text-zinc-500"><%= series.last.unit %></span></p>
+        <%= sparkline(series.map(&:value)) %>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>
+
+<section class="mt-6">
+  <div class="flex items-center justify-between mb-3">
+    <h2 class="font-semibold"><%= t("dashboard.recent_entries") %></h2>
+    <%= link_to t("shared.see_all"), entries_path, class: ui_button(:ghost) %>
+  </div>
+  <div id="entries" class="space-y-2">
+    <%= render @entries %>
+  </div>
+</section>

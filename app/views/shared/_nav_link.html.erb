@@ -1,0 +1,9 @@
+<% active = current_page?(path) || (local_assigns[:prefix] && request.path.start_with?(prefix)) %>
+<%= link_to path, class: "flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-sm transition-colors #{active ? "bg-zinc-200/70 dark:bg-zinc-800 text-zinc-900 dark:text-white font-medium" : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-white"}" do %>
+  <% if local_assigns[:dot] %>
+    <span class="w-2 h-2 rounded-full <%= dot %>"></span>
+  <% else %>
+    <%= icon(icon_name) %>
+  <% end %>
+  <span class="truncate"><%= label %></span>
+<% end %>

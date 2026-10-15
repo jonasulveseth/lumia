@@ -1,0 +1,34 @@
+<% content_for :title, @label %>
+<%= page_header(@label) { link_to t("shared.back"), measurements_path, class: ui_button(:secondary) } %>
+
+<section class="<%= ui_surface(:card) %> mb-6"><%= line_chart(@measurements.to_a) %></section>
+
+<div class="overflow-x-auto <%= ui_surface(:card) %> p-0">
+  <table class="w-full">
+    <thead><tr class="<%= ui_table(:row) %>">
+      <th class="<%= ui_table(:header) %>"><%= t("measurements.when") %></th>
+      <th class="<%= ui_table(:header) %>"><%= t("measurements.value") %></th>
+      <th class="<%= ui_table(:header) %>"><%= t("measurements.reference") %></th>
+      <th class="<%= ui_table(:header) %>"><%= t("measurements.source") %></th>
+      <th></th>
+    </tr></thead>
+    <tbody>
+      <% @measurements.each do |m| %>
+        <tr class="<%= ui_table(:row) %>">
+          <td class="<%= ui_table(:cell) %> whitespace-nowrap"><%= l(m.measured_at, format: :short) %></td>
+          <td class="<%= ui_table(:cell) %> <%= "text-red-600 dark:text-red-400 font-medium" if m.out_of_range? %>"><%= number_display(m.value) %> <%= m.unit %></td>
+          <td class="<%= ui_table(:cell) %> text-zinc-500"><%= [m.reference_low, m.reference_high].any? ? "#{number_display(m.reference_low)}–#{number_display(m.reference_high)}" : "–" %></td>
+          <td class="<%= ui_table(:cell) %> text-zinc-500">
+            <% if m.source.is_a?(Document) %><%= link_to m.source.title, m.source, class: "hover:underline" %>
+            <% elsif m.source.is_a?(Entry) %><%= t("measurements.from_entry") %>
+            <% else %><%= t("measurements.manual") %>
+            <% end %>
+          </td>
+          <td class="<%= ui_table(:cell) %> text-right">
+            <%= button_to measurement_path(m), method: :delete, class: ui_button(:ghost), form: { data: { turbo_confirm: t("shared.confirm_delete") } } do %><%= icon("trash-2") %><% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

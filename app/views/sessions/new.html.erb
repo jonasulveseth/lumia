@@ -1,0 +1,20 @@
+<% content_for :title, t("sessions.title") %>
+<div class="<%= ui_surface(:card) %>">
+  <h1 class="text-xl font-semibold mb-1"><%= t("sessions.title") %></h1>
+  <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6"><%= t("sessions.subtitle") %></p>
+  <%= form_with url: session_path, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :email_address, t("fields.email"), class: ui_field(:label) %>
+      <%= f.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address], class: ui_field(:input) %>
+    </div>
+    <div>
+      <%= f.label :password, t("fields.password"), class: ui_field(:label) %>
+      <%= f.password_field :password, required: true, autocomplete: "current-password", maxlength: 72, class: ui_field(:input) %>
+    </div>
+    <%= f.submit t("sessions.submit"), class: "#{ui_button(:primary)} w-full" %>
+  <% end %>
+  <div class="mt-6 flex justify-between text-sm">
+    <%= link_to t("sessions.forgot"), new_password_path, class: "text-zinc-500 hover:text-zinc-900 dark:hover:text-white" %>
+    <%= link_to t("registrations.link"), new_registration_path, class: "text-teal-600 dark:text-teal-400 font-medium" %>
+  </div>
+</div>

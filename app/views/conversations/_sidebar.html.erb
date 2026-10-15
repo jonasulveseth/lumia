@@ -1,0 +1,6 @@
+<aside class="space-y-1">
+  <%= button_to conversations_path, class: "#{ui_button(:secondary)} w-full mb-3" do %><%= icon("plus") %> <%= t("coach.new") %><% end %>
+  <% conversations.each do |c| %>
+    <%= link_to c.display_title, conversation_path(c), class: "block px-3 py-1.5 rounded-lg text-sm truncate #{local_assigns[:current] == c ? "bg-zinc-200/70 dark:bg-zinc-800 font-medium" : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/60"}" %>
+  <% end %>
+</aside>

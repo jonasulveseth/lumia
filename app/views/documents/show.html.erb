@@ -1,0 +1,41 @@
+<% content_for :title, @document.title %>
+<%= turbo_stream_from current_user, :documents %>
+<%= page_header(@document.title, [t("documents.kinds.#{@document.kind}"), (l(@document.taken_on) if @document.taken_on)].compact.join(" · ")) do %>
+  <%= button_to t("documents.reanalyze"), reanalyze_document_path(@document), class: ui_button(:secondary) %>
+  <%= button_to t("shared.delete"), document_path(@document), method: :delete, class: ui_button(:danger), form: { data: { turbo_confirm: t("shared.confirm_delete") } } %>
+<% end %>
+
+<% if @document.status.in?(%w[pending processing]) %>
+  <div class="<%= ui_notice(:info) %> mb-6"><%= icon("loader-circle", css: "w-4 h-4 animate-spin mt-0.5") %><%= t("documents.analyzing") %> <%= link_to t("shared.refresh"), document_path(@document), class: "underline" %></div>
+<% elsif @document.status == "failed" %>
+  <div class="<%= ui_notice(:error) %> mb-6"><%= t("documents.failed") %> <%= @document.error_message %></div>
+<% end %>
+
+<% if @document.summary.present? %>
+  <section class="<%= ui_surface(:card) %> mb-6">
+    <h2 class="font-semibold mb-2"><%= t("documents.summary") %></h2>
+    <div class="prose-lumia"><%= markdown(@document.summary) %></div>
+    <p class="<%= ui_field(:hint) %> mt-3"><%= t("documents.not_medical_advice") %></p>
+  </section>
+<% end %>
+
+<% if @measurements.any? %>
+  <div class="overflow-x-auto <%= ui_surface(:card) %> p-0">
+    <table class="w-full">
+      <thead><tr class="<%= ui_table(:row) %>">
+        <th class="<%= ui_table(:header) %>"><%= t("measurements.metric") %></th>
+        <th class="<%= ui_table(:header) %>"><%= t("measurements.value") %></th>
+        <th class="<%= ui_table(:header) %>"><%= t("measurements.reference") %></th>
+      </tr></thead>
+      <tbody>
+        <% @measurements.each do |m| %>
+          <tr class="<%= ui_table(:row) %>">
+            <td class="<%= ui_table(:cell) %>"><%= link_to m.display_label, measurement_path(m.metric_key), class: "hover:underline" %></td>
+            <td class="<%= ui_table(:cell) %> <%= "text-red-600 dark:text-red-400 font-medium" if m.out_of_range? %>"><%= number_display(m.value) %> <%= m.unit %></td>
+            <td class="<%= ui_table(:cell) %> text-zinc-500"><%= [m.reference_low, m.reference_high].any? ? "#{number_display(m.reference_low)}–#{number_display(m.reference_high)}" : "–" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

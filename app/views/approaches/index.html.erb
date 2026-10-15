@@ -1,0 +1,16 @@
+<% content_for :title, t("approaches.title") %>
+<%= page_header(t("approaches.title"), t("approaches.subtitle")) %>
+
+<div class="space-y-8">
+  <% ([nil] + Area.keys).each do |area_key| %>
+    <% approaches = @groups[area_key] or next %>
+    <section>
+      <h2 class="text-sm font-semibold mb-3"><%= area_key ? Area.find(area_key).name : t("approaches.general") %></h2>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <% approaches.each do |a| %>
+          <%= render "approaches/approach", approach: a, choice: @choices[a.key] %>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>

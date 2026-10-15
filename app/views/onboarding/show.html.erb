@@ -1,0 +1,13 @@
+<% content_for :title, t("onboarding.title") %>
+<% content_for :wide, true %>
+<div class="mb-6">
+  <div class="flex gap-1.5 mb-4">
+    <% OnboardingController::STEPS.each_with_index do |s, i| %>
+      <div class="h-1.5 flex-1 rounded-full <%= i <= @step_index ? "bg-teal-500" : "bg-zinc-200 dark:bg-zinc-800" %>"></div>
+    <% end %>
+  </div>
+  <p class="text-xs uppercase tracking-wide text-zinc-500"><%= t("onboarding.step", n: @step_index + 1, total: OnboardingController::STEPS.size) %></p>
+  <h1 class="text-2xl font-semibold mt-1"><%= t("onboarding.#{@step}.title") %></h1>
+  <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400"><%= t("onboarding.#{@step}.intro") %></p>
+</div>
+<%= render "onboarding/#{@step}" %>

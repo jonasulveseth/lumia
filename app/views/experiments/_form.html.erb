@@ -1,0 +1,57 @@
+<%= form_with model: experiment, class: "#{ui_surface(:card)} space-y-5 max-w-2xl" do |f| %>
+  <% if experiment.errors.any? %><div class="<%= ui_notice(:error) %>"><%= experiment.errors.full_messages.to_sentence %></div><% end %>
+  <div>
+    <%= f.label :title, t("experiments.fields.title"), class: ui_field(:label) %>
+    <%= f.text_field :title, required: true, placeholder: t("experiments.title_placeholder"), class: ui_field(:input) %>
+  </div>
+  <div>
+    <%= f.label :hypothesis, t("experiments.fields.hypothesis"), class: ui_field(:label) %>
+    <%= f.text_area :hypothesis, rows: 2, placeholder: t("experiments.hypothesis_placeholder"), class: ui_field(:input) %>
+  </div>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <div>
+      <%= f.label :area_key, t("experiments.fields.area"), class: ui_field(:label) %>
+      <%= f.select :area_key, Area.all.map { [_1.name, _1.key] }, { include_blank: t("experiments.general") }, class: ui_field(:input) %>
+    </div>
+    <div>
+      <%= f.label :approach_key, t("experiments.fields.approach"), class: ui_field(:label) %>
+      <%= f.select :approach_key, Approach.all.map { [_1.name, _1.key] }, { include_blank: "–" }, class: ui_field(:input) %>
+    </div>
+    <div>
+      <%= f.label :starts_on, t("experiments.fields.starts_on"), class: ui_field(:label) %>
+      <%= f.date_field :starts_on, class: ui_field(:input) %>
+    </div>
+    <div>
+      <%= f.label :ends_on, t("experiments.fields.ends_on"), class: ui_field(:label) %>
+      <%= f.date_field :ends_on, class: ui_field(:input) %>
+    </div>
+    <div>
+      <%= f.label :status, t("experiments.fields.status"), class: ui_field(:label) %>
+      <%= f.select :status, Experiment::STATUSES.map { [t("experiments.status.#{_1}"), _1] }, {}, class: ui_field(:input) %>
+    </div>
+  </div>
+  <% if experiment.persisted? %>
+    <div class="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
+      <h2 class="font-semibold"><%= t("experiments.evaluate") %></h2>
+      <div>
+        <%= f.label :outcome, t("experiments.fields.outcome"), class: ui_field(:label) %>
+        <%= f.text_area :outcome, rows: 2, class: ui_field(:input) %>
+      </div>
+      <div>
+        <%= f.label :learning, t("experiments.fields.learning"), class: ui_field(:label) %>
+        <%= f.text_area :learning, rows: 2, class: ui_field(:input) %>
+        <p class="<%= ui_field(:hint) %>"><%= t("experiments.learning_hint") %></p>
+      </div>
+      <div class="max-w-[160px]">
+        <%= f.label :success_rating, t("experiments.fields.success_rating"), class: ui_field(:label) %>
+        <%= f.number_field :success_rating, in: 1..10, class: ui_field(:input) %>
+      </div>
+    </div>
+  <% end %>
+  <div class="flex justify-between">
+    <% if experiment.persisted? %>
+      <%= link_to t("shared.delete"), experiment_path(experiment), data: { turbo_method: :delete, turbo_confirm: t("shared.confirm_delete") }, class: ui_button(:danger) %>
+    <% else %><span></span><% end %>
+    <%= f.submit t("shared.save"), class: ui_button(:primary) %>
+  </div>
+<% end %>
