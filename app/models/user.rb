@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :memories, dependent: :destroy
   has_many :insights, dependent: :destroy
   has_many :conversations, dependent: :destroy
+  has_one :interview, -> { where(kind: "interview") }, class_name: "Conversation"
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 

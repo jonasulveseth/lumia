@@ -19,6 +19,12 @@ utforskar nyfikenheten och föreslår aldrig det avvisade. Coachstilen (varm, ra
 Hälsa & kropp · Kost · Sinne & mående · Relationer · Karriär & arbete · Lärande · Ekonomi · Mening & värderingar.
 Definieras i `config/lumia/areas.yml`. Användaren kan pausa områden.
 
+## Onboarding: en intervju
+Inga formulär. Personen anger namn och språk, sedan intervjuar Lumia i chatten (`Onboarding::Interview`, som
+intervjuerna i reemove). Efter varje svar läser en separat AI-uppgift hela samtalet och uppdaterar ett profilutkast
+(`Conversation#profile_draft`): sammanfattning, områden med skattning, nuläge och fokusmål, ramverk, coachstil och
+minnen. Utkastet och en förståelsemätare visas live bredvid chatten. "Klar" skriver in utkastet i användarens data.
+
 ## Hur data kommer in
 | Källa | Vad händer |
 |---|---|

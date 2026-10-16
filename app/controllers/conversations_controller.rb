@@ -1,12 +1,12 @@
 class ConversationsController < ApplicationController
   def index
-    @conversations = current_user.conversations.recent.limit(30)
+    @conversations = current_user.conversations.coaching.recent.limit(30)
     @conversation = current_user.conversations.new(area_key: params[:area])
   end
 
   def show
-    @conversation = current_user.conversations.find(params[:id])
-    @conversations = current_user.conversations.recent.limit(30)
+    @conversation = current_user.conversations.coaching.find(params[:id])
+    @conversations = current_user.conversations.coaching.recent.limit(30)
   end
 
   def create
@@ -19,7 +19,7 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
-    current_user.conversations.find(params[:id]).destroy
+    current_user.conversations.coaching.find(params[:id]).destroy
     redirect_to coach_path, status: :see_other
   end
 end

@@ -1,0 +1,24 @@
+<%# Broadcastas av InterviewReplyJob efter varje svar – använd inte current_user här. %>
+<% percent = interview.draft.confidence * 10 %>
+<div id="interview_progress">
+  <div class="flex items-center gap-3">
+    <div class="flex-1 min-w-0">
+      <div class="flex justify-between text-xs text-zinc-500 dark:text-zinc-400 mb-1.5">
+        <span><%= t("onboarding.interview.understanding") %></span>
+        <span><%= percent %>%</span>
+      </div>
+      <div class="h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+        <div class="h-full rounded-full bg-teal-500 transition-all duration-500" style="width: <%= percent %>%"></div>
+      </div>
+    </div>
+    <%= button_to finish_onboarding_path, class: "#{ui_button(:primary)} shrink-0", disabled: !interview.ready? do %>
+      <%= icon("check") %> <%= t("onboarding.finish") %>
+    <% end %>
+  </div>
+  <% unless interview.ready? %>
+    <div class="mt-1 flex flex-wrap items-center gap-x-1 text-xs text-zinc-500 dark:text-zinc-400">
+      <span><%= t("onboarding.interview.not_ready") %></span>
+      <%= button_to t("onboarding.interview.skip"), finish_onboarding_path, class: "underline hover:text-zinc-900 dark:hover:text-white cursor-pointer", form_class: "inline" %>
+    </div>
+  <% end %>
+</div>

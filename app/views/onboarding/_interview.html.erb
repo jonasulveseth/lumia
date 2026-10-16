@@ -1,0 +1,19 @@
+<%= turbo_stream_from @conversation %>
+<div class="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-6">
+  <div class="flex flex-col h-[calc(100dvh-12rem)] min-h-[420px]" data-controller="chat">
+    <%= render "onboarding/progress", interview: @interview %>
+
+    <div id="messages" class="flex-1 overflow-y-auto space-y-4 pr-1 mt-4" data-chat-target="messages">
+      <%= render @conversation.messages %>
+    </div>
+
+    <%= form_with model: Message.new, url: message_onboarding_path, class: "mt-4 flex items-end gap-2",
+          data: { chat_target: "form", action: "turbo:submit-end->chat#reset" } do |f| %>
+      <%= f.text_area :content, rows: 2, required: true, placeholder: t("onboarding.interview.placeholder"),
+            class: "#{ui_field(:input)} resize-none", data: { chat_target: "input", action: "keydown->chat#keydown" } %>
+      <%= f.button class: ui_button(:solid), title: t("coach.send") do %><%= icon("send") %><% end %>
+    <% end %>
+  </div>
+
+  <%= render "onboarding/profile", interview: @interview %>
+</div>

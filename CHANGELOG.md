@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-16
+
+### Features
+- Onboardingen är en intervju i stället för formulär och reglage: namn och språk, sedan ställer Lumia frågor i chatten.
+  Profilen (sammanfattning, livsområden med skattning och fokusmål, ramverk, coachstil, minnen) växer fram live
+  bredvid samtalet med en mätare för hur väl Lumia känner personen, och sparas när man trycker Klar. (6057242)
+
 ## 2026-10-15
 
 ### Infrastructure

@@ -35,5 +35,7 @@ module YamlCatalog
   end
 
   def to_param = key
+  # Namnet på ett bestämt språk, t.ex. engelska i prompts till AI:n.
+  def name_in(locale) = I18n.with_locale(locale) { name }
   def ==(other) = other.class == self.class && other.key == key
 end

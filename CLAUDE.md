@@ -34,6 +34,8 @@ development (`bin/rails runner` utan `RAILS_ENV`).
   ska känna till → lägg till en sektion där.
 - **Inflöde:** `Entry` (fri text, chatt) → `EntryProcessingJob`/`EntryAnalyzer` (områden, mätvärden, minnen).
   `Document` (provsvar) → `DocumentAnalysisJob`/`DocumentAnalyzer` → `Measurement`.
+- **Onboarding** är en intervju (`Onboarding::Interview`/`InterviewReplyJob`), inga formulär. Samtalet är en
+  `Conversation` med `kind: "interview"` och syns inte i coachchatten; `apply!` skriver in profilutkastet.
 - **Mönster:** `PatternFinder` räknar korrelationer (dagliga mätvärden, veckoskattningar) och låter AI:n
   formulera `Insight`s. Körs måndagar via `config/recurring.yml` och på begäran.
 - **Analyser ska vara idempotenta:** en omkörning ersätter det den skapat tidigare i stället för att dubblera.
