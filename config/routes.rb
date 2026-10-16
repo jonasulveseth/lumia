@@ -5,8 +5,12 @@ Rails.application.routes.draw do
 
   root "dashboard#show"
 
-  get "onboarding(/:step)", to: "onboarding#show", as: :onboarding
-  patch "onboarding/:step", to: "onboarding#update", as: :update_onboarding
+  # Onboarding: namn och språk, sedan en intervju i chatten
+  resource :onboarding, only: :show, controller: "onboarding" do
+    post :start
+    post :message
+    post :finish
+  end
 
   # Livsområden: /areas/health, /areas/mind …
   resources :areas, only: %i[index show update]

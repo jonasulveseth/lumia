@@ -84,23 +84,27 @@ en:
       description: Numbers, trends and measurable experiments.
   onboarding:
     title: Get started
-    step: Step %{n} of %{total}
-    next: Next
-    back: Back
-    finish: Done – show my overview
+    finish: Done
     done: Welcome! A good start is to write down what is going on right now.
+    start:
+      title: Hi! Let's get to know each other
+      intro: Instead of forms there is a conversation. Lumia asks about your life, what you want to change and how you want to be coached – and builds your profile as you talk.
+      name: What should we call you?
+      submit: Start the interview
+      hint: Takes about ten minutes. You can stop and continue later.
+    interview:
+      placeholder: Answer in your own words …
+      understanding: How well Lumia knows you
+      not_ready: Done becomes active when Lumia has a picture of you.
+      skip: Skip
     profile:
-      title: Tell us a bit about yourself
-      intro: This is the foundation the coach starts from. You can change everything later.
-      about_placeholder: What matters to you right now? What do you want to be different a year from now?
-    areas:
-      title: Your life areas
-      intro: Choose the areas you want to work on and rate how satisfied you are today. One focus goal per area is enough – small is good.
-      rating: How satisfied are you
-      goal_placeholder: For example "sleep 7 hours four nights a week"
-    approaches:
-      title: What resonates with you?
-      intro: There are many schools – in nutrition, training, wellbeing and career. Lumia uses the same framework for everyone, but the content adapts to what you believe in. Mark what feels right, what you are curious about and what you don't want.
+      title: What Lumia has understood
+      intro: Grows as you talk. You can change everything later.
+      empty: Nothing yet – tell Lumia a bit about yourself.
+      areas: Life areas
+      left_out: "Left out: %{areas}"
+      approaches: Frameworks and schools
+      memories: Worth remembering
   dashboard:
     greeting:
       morning: Good morning %{name}

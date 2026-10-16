@@ -84,23 +84,27 @@ sv:
       description: Siffror, trender och mätbara experiment.
   onboarding:
     title: Kom igång
-    step: Steg %{n} av %{total}
-    next: Nästa
-    back: Tillbaka
-    finish: Klart – visa min översikt
+    finish: Klar
     done: Välkommen! Börja gärna med att skriva vad som händer just nu.
+    start:
+      title: Hej! Låt oss lära känna varandra
+      intro: I stället för formulär blir det ett samtal. Lumia ställer frågor om ditt liv, vad du vill förändra och hur du vill bli coachad – och bygger din profil medan ni pratar.
+      name: Vad vill du kallas?
+      submit: Starta intervjun
+      hint: Tar runt tio minuter. Du kan avbryta och fortsätta senare.
+    interview:
+      placeholder: Svara med egna ord …
+      understanding: Hur väl Lumia känner dig
+      not_ready: Klar blir aktiv när Lumia har en bild av dig.
+      skip: Hoppa över
     profile:
-      title: Berätta lite om dig
-      intro: Det här är grunden coachen utgår från. Du kan ändra allt senare.
-      about_placeholder: Vad är viktigt för dig just nu? Vad vill du ska vara annorlunda om ett år?
-    areas:
-      title: Dina livsområden
-      intro: Välj vilka områden du vill jobba med och skatta hur nöjd du är i dag. Ett fokusmål per område räcker – gärna litet.
-      rating: Hur nöjd är du
-      goal_placeholder: Till exempel "sova 7 timmar fyra nätter i veckan"
-    approaches:
-      title: Vad resonerar med dig?
-      intro: Det finns många skolor – inom kost, träning, mående och karriär. Lumia använder samma ramverk för alla, men innehållet anpassas efter vad du tror på. Markera det som känns rätt, det du är nyfiken på och det du inte vill ha.
+      title: Det här har Lumia förstått
+      intro: Växer fram medan ni pratar. Allt går att ändra senare.
+      empty: Inget än – berätta lite om dig själv.
+      areas: Livsområden
+      left_out: "Lämnas utanför: %{areas}"
+      approaches: Ramverk och skolor
+      memories: Att komma ihåg
   dashboard:
     greeting:
       morning: God morgon %{name}

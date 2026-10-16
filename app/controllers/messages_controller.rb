@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def create
-    @conversation = current_user.conversations.find(params[:conversation_id])
+    @conversation = current_user.conversations.coaching.find(params[:conversation_id])
     content = params.dig(:message, :content).to_s.strip
     return head :unprocessable_entity if content.blank?
 

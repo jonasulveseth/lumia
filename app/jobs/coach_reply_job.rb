@@ -1,9 +1,7 @@
 # Coachens svar i chatten. Strömmar texten till meddelandet via Turbo Streams.
 class CoachReplyJob < ApplicationJob
+  include ReplyStreaming
   queue_as :default
-
-  # Sekunder mellan uppdateringar av det strömmande svaret.
-  class_attribute :broadcast_interval, default: 0.15
 
   def perform(reply)
     conversation = reply.conversation
@@ -14,18 +12,7 @@ class CoachReplyJob < ApplicationJob
     history = conversation.messages.where.not(id: reply.id).last(20).map { { role: _1.role, content: _1.content } }
     messages = [ { role: "system", content: context.system_prompt(task) } ] + history
 
-    reply.update!(status: "streaming")
-    buffer = +""
-    last_push = Time.current
-    text = Ai.chat(messages, max_tokens: 1500) do |chunk|
-      buffer << chunk
-      if Time.current - last_push >= broadcast_interval
-        reply.update_columns(content: buffer.dup) # dup: annars delar attributet objekt med bufferten och slutsparningen ser ingen ändring
-        reply.broadcast_replace_to conversation
-        last_push = Time.current
-      end
-    end
-    reply.update!(content: text, status: "done")
+    stream_reply(reply, messages, max_tokens: 1500)
     conversation.update!(title: conversation.messages.first.content.truncate(60)) if conversation.title.blank?
 
     # Det användaren skrev blir en loggpost, så att minnen och mätvärden

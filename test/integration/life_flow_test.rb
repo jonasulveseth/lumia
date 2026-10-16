@@ -3,7 +3,7 @@ require "test_helper"
 class LifeFlowTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
-  test "a new person registers, onboards and lands on the overview" do
+  test "a new person registers, is interviewed and lands on the overview" do
     post registration_path, params: { user: { name: "Kim", email_address: "kim@example.com", password: "hemligt123" } }
     assert_redirected_to onboarding_path
     get root_path
@@ -11,29 +11,55 @@ class LifeFlowTest < ActionDispatch::IntegrationTest
 
     get onboarding_path
     assert_response :success
-    patch update_onboarding_path("profile"), params: { user: { name: "Kim", coach_style: "direct", about_me: "Vill sova bättre", locale: "sv" } }
-    assert_redirected_to onboarding_path("areas")
+    assert_select "form[action='#{start_onboarding_path}']"
 
-    get onboarding_path("areas")
-    areas = Area.keys.to_h { [ _1, { active: "1", rating: "6" } ] }
-    areas["finance"] = { active: "0" }
-    patch update_onboarding_path("areas"), params: { areas: areas }
-    assert_redirected_to onboarding_path("approaches")
-
-    get onboarding_path("approaches")
+    FakeAi.respond_with("Hej Kim! Vad händer i ditt liv just nu?")
+    perform_enqueued_jobs { post start_onboarding_path, params: { user: { name: "Kim", locale: "sv" } } }
+    assert_redirected_to onboarding_path
+    get onboarding_path
     assert_response :success
-    patch update_onboarding_path("approaches"), params: { approaches: { mediterranean: "resonates", low_carb: "rejected", stoicism: "curious" } }
+    assert_select "#messages", text: /Vad händer i ditt liv/
+    assert_select "#interview_progress button[disabled]"
+
+    FakeAi.respond_with("Det låter tungt. Vill du att jag är rak med dig?", {
+      summary: "Du vill sova bättre och orka mer.", birth_year: 1985, coach_style: "direct",
+      areas: { health: { active: true, rating: 4, current_state: "Sover 5 timmar", focus_goal: "Sova 7 timmar" },
+               finance: { active: false }, nonsense: { active: true } },
+      approaches: { mediterranean: "resonates", low_carb: "rejected", stoicism: "curious", made_up: "resonates" },
+      memories: [ { content: "Har två små barn", category: "fact", area_key: "relationships" } ],
+      confidence: 7
+    })
+    perform_enqueued_jobs do
+      post message_onboarding_path, params: { message: { content: "Jag sover dåligt, gillar medelhavskost men inte LCHF." } }, as: :turbo_stream
+    end
+    get onboarding_path
+    assert_select "#interview_progress button:not([disabled])", text: /Klar/
+    assert_select "#interview_profile", text: /Sova 7 timmar/
+
+    post finish_onboarding_path
     assert_redirected_to root_path
 
     user = User.find_by!(email_address: "kim@example.com")
     assert user.onboarded?
     assert_equal "direct", user.coach_style
+    assert_equal 1985, user.birth_year
+    assert_equal "Du vill sova bättre och orka mer.", user.about_me
+    assert_equal 4, user.life_area(:health).rating
+    assert_equal "Sova 7 timmar", user.life_area(:health).focus_goal
     refute user.life_area(:finance).active
     assert_equal %w[mediterranean], user.chosen_approaches.map(&:key)
+    assert_equal [ "Har två små barn" ], user.memories.pluck(:content)
+    assert_empty user.entries, "intervjun ska inte bli loggposter"
+
+    # Klar igen ersätter i stället för att dubblera.
+    post finish_onboarding_path
+    assert_equal 1, user.memories.count
 
     get root_path
     assert_response :success
     assert_select "svg polygon"
+    get coach_path
+    assert_select "a[href='#{conversation_path(user.interview)}']", count: 0
   end
 
   %w[sv en].each do |locale|
@@ -54,12 +80,17 @@ class LifeFlowTest < ActionDispatch::IntegrationTest
     conversation = user.conversations.create!(area_key: "health")
     conversation.messages.create!(role: "user", content: "Hej")
     conversation.messages.create!(role: "assistant", content: "Hej på dig")
+    interview = user.conversations.create!(kind: "interview", profile_draft: Onboarding::Draft.sanitize(
+      summary: "Vill sova bättre", coach_style: "direct", confidence: 4,
+      areas: { health: { rating: 5, focus_goal: "Sova 7 h" }, finance: { active: false } },
+      approaches: { stoicism: "curious" }, memories: [ "Har barn" ]))
+    interview.messages.create!(role: "assistant", content: "Vad händer just nu?")
 
     [ root_path, areas_path, area_path("health"), area_path("finance"), approaches_path, entries_path, entries_path(area: "health"),
       measurements_path, measurement_path("sleep_hours"), documents_path, new_document_path, document_path(doc),
       check_ins_path, check_in_path(check_in), edit_check_in_path(check_in), experiments_path, new_experiment_path,
       edit_experiment_path(experiment), memories_path, insights_path, coach_path, conversation_path(conversation),
-      settings_path, style_guide_path ].each do |path|
+      settings_path, style_guide_path, onboarding_path ].each do |path|
       get path
       assert_response :success, "#{path} gav #{response.status}"
     end

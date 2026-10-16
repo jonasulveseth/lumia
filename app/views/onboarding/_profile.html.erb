@@ -1,22 +1,68 @@
-<%= form_with model: current_user, url: update_onboarding_path("profile"), method: :patch, class: "#{ui_surface(:card)} space-y-5" do |f| %>
-  <div class="grid sm:grid-cols-2 gap-4">
-    <div>
-      <%= f.label :name, t("fields.name"), class: ui_field(:label) %>
-      <%= f.text_field :name, class: ui_field(:input) %>
-    </div>
-    <div>
-      <%= f.label :birth_year, t("fields.birth_year"), class: ui_field(:label) %>
-      <%= f.number_field :birth_year, in: 1900..Date.current.year, class: ui_field(:input) %>
-    </div>
-  </div>
+<%# Broadcastas av InterviewReplyJob efter varje svar – använd inte current_user här. %>
+<% draft = interview.draft %>
+<aside id="interview_profile" class="<%= ui_surface(:card) %> space-y-5 self-start">
   <div>
-    <%= f.label :about_me, t("fields.about_me"), class: ui_field(:label) %>
-    <%= f.text_area :about_me, rows: 4, placeholder: t("onboarding.profile.about_placeholder"), class: ui_field(:input) %>
+    <h2 class="text-sm font-semibold"><%= t("onboarding.profile.title") %></h2>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400"><%= t("onboarding.profile.intro") %></p>
   </div>
-  <%= render "shared/coach_style_field", f: f %>
-  <div>
-    <%= f.label :locale, t("fields.locale"), class: ui_field(:label) %>
-    <%= f.select :locale, [["Svenska", "sv"], ["English", "en"]], {}, class: ui_field(:input) %>
-  </div>
-  <div class="flex justify-end"><%= f.submit t("onboarding.next"), class: ui_button(:primary) %></div>
-<% end %>
+
+  <% if draft.empty? %>
+    <p class="text-sm italic text-zinc-400 dark:text-zinc-500"><%= t("onboarding.profile.empty") %></p>
+  <% else %>
+    <% if draft.summary.present? %>
+      <p class="text-sm text-zinc-700 dark:text-zinc-300"><%= draft.summary %></p>
+    <% end %>
+
+    <% if draft.active_areas.any? %>
+      <section>
+        <h3 class="<%= ui_field(:label) %>"><%= t("onboarding.profile.areas") %></h3>
+        <ul class="space-y-2">
+          <% draft.active_areas.each do |area, a| %>
+            <li class="text-sm">
+              <div class="flex items-center gap-2">
+                <span class="<%= area_color(area, :text) %>"><%= icon(area.icon) %></span>
+                <span class="flex-1 min-w-0 truncate"><%= area.name %></span>
+                <% if a["rating"] %><span class="text-xs font-medium text-zinc-500 dark:text-zinc-400"><%= a["rating"] %>/10</span><% end %>
+              </div>
+              <% if a["focus_goal"].present? %>
+                <p class="pl-6 text-xs text-zinc-500 dark:text-zinc-400"><%= a["focus_goal"] %></p>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+        <% if draft.left_out_areas.any? %>
+          <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400"><%= t("onboarding.profile.left_out", areas: draft.left_out_areas.map(&:name).to_sentence) %></p>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if draft.approaches.any? %>
+      <section>
+        <h3 class="<%= ui_field(:label) %>"><%= t("onboarding.profile.approaches") %></h3>
+        <div class="flex flex-wrap gap-1.5">
+          <% draft.approaches.each do |key, stance| %>
+            <span class="<%= ui_badge(stance == "rejected" ? :neutral : :good) %>" title="<%= t("approaches.stance.#{stance}") %>">
+              <%= Approach.find(key).name %> · <%= t("approaches.stance.#{stance}") %>
+            </span>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+
+    <% if draft.coach_style %>
+      <section>
+        <h3 class="<%= ui_field(:label) %>"><%= t("fields.coach_style") %></h3>
+        <p class="text-sm"><%= t("coach_styles.#{draft.coach_style}.name") %></p>
+      </section>
+    <% end %>
+
+    <% if draft.memories.any? %>
+      <section>
+        <h3 class="<%= ui_field(:label) %>"><%= t("onboarding.profile.memories") %></h3>
+        <ul class="space-y-1 text-xs text-zinc-600 dark:text-zinc-400 list-disc pl-4">
+          <% draft.memories.first(8).each do |m| %><li><%= m["content"] %></li><% end %>
+        </ul>
+      </section>
+    <% end %>
+  <% end %>
+</aside>

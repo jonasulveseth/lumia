@@ -1,0 +1,16 @@
+<div class="<%= ui_surface(:card) %>">
+  <h1 class="text-xl font-semibold"><%= t("onboarding.start.title") %></h1>
+  <p class="mt-2 mb-6 text-sm text-zinc-600 dark:text-zinc-400"><%= t("onboarding.start.intro") %></p>
+  <%= form_with model: current_user, url: start_onboarding_path, method: :post, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :name, t("onboarding.start.name"), class: ui_field(:label) %>
+      <%= f.text_field :name, required: true, autofocus: true, class: ui_field(:input) %>
+    </div>
+    <div>
+      <%= f.label :locale, t("fields.locale"), class: ui_field(:label) %>
+      <%= f.select :locale, [["Svenska", "sv"], ["English", "en"]], {}, class: ui_field(:input) %>
+    </div>
+    <%= f.button class: "#{ui_button(:primary)} w-full" do %><%= icon("sparkles") %> <%= t("onboarding.start.submit") %><% end %>
+    <p class="<%= ui_field(:hint) %> text-center"><%= t("onboarding.start.hint") %></p>
+  <% end %>
+</div>
