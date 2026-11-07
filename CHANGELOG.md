@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-07
+
+### Infrastructure
+- Lumia nås publikt på https://lumia.reemove.ai (Cloudflare → Caddy → `localhost:3077`).
+- `lumia.service` ger aldrig upp omstarter (`StartLimitIntervalSec=0`) och väntar på `network-online.target` vid boot. (69ee149)
+
 ## 2026-10-16
 
 ### Features
