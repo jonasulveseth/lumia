@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-08
+
+### Features
+- Nebius Token Factory som AI-leverantör: `inference: { provider: nebius, api_key: ... }` i credentials räcker;
+  standardmodell `deepseek-ai/DeepSeek-V4.1-Flash-1017`. Utan nyckel används lokal Ollama som förut. (008dc27)
+
 ## 2026-11-07
 
 ### Infrastructure
