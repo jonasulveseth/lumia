@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-15
+
+### Fixes
+- Onboarding: den breda, ljusa scrollbaren i intervjun är borta. Scrollbars är nu smala och zinc-färgade i hela appen
+  och följer mörkt läge (`color-scheme`), och profilpanelen scrollar i sig själv på breda skärmar i stället för att ge
+  sidan en andra scrollbar bredvid chattens. Exempel i stilguiden. (48f4dc4)
+
 ## 2026-11-08
 
 ### Features

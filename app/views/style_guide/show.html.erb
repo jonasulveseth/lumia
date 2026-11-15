@@ -25,4 +25,11 @@
     <h2 class="font-semibold mb-4">Areas</h2>
     <div class="flex flex-wrap gap-2"><% Area.all.each do |a| %><%= area_badge(a) %><% end %></div>
   </section>
+  <section class="<%= ui_surface(:card) %>">
+    <h2 class="font-semibold mb-4">Scrollbars</h2>
+    <p class="<%= ui_field(:hint) %> mb-3">Thin and zinc everywhere (base layer in application.css) and they follow dark mode. Just add overflow-y-auto; never style scrollbars per view.</p>
+    <div class="h-24 overflow-y-auto pr-1 space-y-2 text-sm">
+      <% 8.times do |i| %><p>Row <%= i + 1 %></p><% end %>
+    </div>
+  </section>
 </div>
