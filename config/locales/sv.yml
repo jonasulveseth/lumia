@@ -97,9 +97,12 @@ sv:
       understanding: Hur väl Lumia känner dig
       not_ready: Klar blir aktiv när Lumia har en bild av dig.
       skip: Hoppa över
+      ready: Lumia har en bra bild av dig nu. Gå vidare när du vill – eller fortsätt prata om det finns mer.
+      continue: Gå vidare
     profile:
       title: Det här har Lumia förstått
       intro: Växer fram medan ni pratar. Allt går att ändra senare.
+      summary: Sammanfattning
       empty: Inget än – berätta lite om dig själv.
       areas: Livsområden
       left_out: "Lämnas utanför: %{areas}"

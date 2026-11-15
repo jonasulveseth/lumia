@@ -97,9 +97,12 @@ en:
       understanding: How well Lumia knows you
       not_ready: Done becomes active when Lumia has a picture of you.
       skip: Skip
+      ready: Lumia has a good picture of you now. Continue whenever you like – or keep talking if there is more.
+      continue: Continue
     profile:
       title: What Lumia has understood
       intro: Grows as you talk. You can change everything later.
+      summary: Summary
       empty: Nothing yet – tell Lumia a bit about yourself.
       areas: Life areas
       left_out: "Left out: %{areas}"

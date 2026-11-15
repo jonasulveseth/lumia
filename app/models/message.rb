@@ -5,8 +5,12 @@ class Message < ApplicationRecord
 
   validates :role, inclusion: { in: ROLES }
 
-  after_create_commit -> { broadcast_append_to conversation, target: "messages" }
+  # Nya meddelanden läggs till av svaret på formuläret (ordningen blir då alltid rätt);
+  # bara uppdateringar av det strömmande svaret går via broadcast.
   after_update_commit -> { broadcast_replace_to conversation }
+
+  # Klart att visa som det är: chatten väntar inte på fler uppdateringar.
+  def final? = user? || status.in?(%w[done failed])
 
   def user? = role == "user"
   def assistant? = role == "assistant"

@@ -1,6 +1,6 @@
 <%# Broadcastas av InterviewReplyJob efter varje svar – använd inte current_user här. %>
 <% draft = interview.draft %>
-<aside id="interview_profile" class="<%= ui_surface(:card) %> space-y-5 self-start">
+<aside id="interview_profile" class="<%= ui_surface(:card) %> space-y-3 self-start lg:max-h-[calc(100dvh-12rem)] overflow-y-auto">
   <div>
     <h2 class="text-sm font-semibold"><%= t("onboarding.profile.title") %></h2>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400"><%= t("onboarding.profile.intro") %></p>
@@ -10,12 +10,14 @@
     <p class="text-sm italic text-zinc-400 dark:text-zinc-500"><%= t("onboarding.profile.empty") %></p>
   <% else %>
     <% if draft.summary.present? %>
-      <p class="text-sm text-zinc-700 dark:text-zinc-300"><%= draft.summary %></p>
+      <%= render layout: "onboarding/profile_section", locals: { key: "summary", title: t("onboarding.profile.summary") } do %>
+        <p class="text-sm text-zinc-700 dark:text-zinc-300"><%= draft.summary %></p>
+      <% end %>
     <% end %>
 
-    <% if draft.active_areas.any? %>
-      <section>
-        <h3 class="<%= ui_field(:label) %>"><%= t("onboarding.profile.areas") %></h3>
+    <% if draft.active_areas.any? || draft.left_out_areas.any? %>
+      <%= render layout: "onboarding/profile_section",
+            locals: { key: "areas", title: t("onboarding.profile.areas"), count: draft.active_areas.size, open: true } do %>
         <ul class="space-y-2">
           <% draft.active_areas.each do |area, a| %>
             <li class="text-sm">
@@ -33,12 +35,12 @@
         <% if draft.left_out_areas.any? %>
           <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400"><%= t("onboarding.profile.left_out", areas: draft.left_out_areas.map(&:name).to_sentence) %></p>
         <% end %>
-      </section>
+      <% end %>
     <% end %>
 
     <% if draft.approaches.any? %>
-      <section>
-        <h3 class="<%= ui_field(:label) %>"><%= t("onboarding.profile.approaches") %></h3>
+      <%= render layout: "onboarding/profile_section",
+            locals: { key: "approaches", title: t("onboarding.profile.approaches"), count: draft.approaches.size } do %>
         <div class="flex flex-wrap gap-1.5">
           <% draft.approaches.each do |key, stance| %>
             <span class="<%= ui_badge(stance == "rejected" ? :neutral : :good) %>" title="<%= t("approaches.stance.#{stance}") %>">
@@ -46,23 +48,23 @@
             </span>
           <% end %>
         </div>
-      </section>
+      <% end %>
     <% end %>
 
     <% if draft.coach_style %>
-      <section>
-        <h3 class="<%= ui_field(:label) %>"><%= t("fields.coach_style") %></h3>
-        <p class="text-sm"><%= t("coach_styles.#{draft.coach_style}.name") %></p>
-      </section>
+      <div class="flex items-center justify-between gap-2 border-t border-zinc-200 dark:border-zinc-800 pt-3 text-xs">
+        <span class="font-medium text-zinc-600 dark:text-zinc-300"><%= t("fields.coach_style") %></span>
+        <span class="text-zinc-500 dark:text-zinc-400"><%= t("coach_styles.#{draft.coach_style}.name") %></span>
+      </div>
     <% end %>
 
     <% if draft.memories.any? %>
-      <section>
-        <h3 class="<%= ui_field(:label) %>"><%= t("onboarding.profile.memories") %></h3>
+      <%= render layout: "onboarding/profile_section",
+            locals: { key: "memories", title: t("onboarding.profile.memories"), count: draft.memories.size } do %>
         <ul class="space-y-1 text-xs text-zinc-600 dark:text-zinc-400 list-disc pl-4">
-          <% draft.memories.first(8).each do |m| %><li><%= m["content"] %></li><% end %>
+          <% draft.memories.each do |m| %><li><%= m["content"] %></li><% end %>
         </ul>
-      </section>
+      <% end %>
     <% end %>
   <% end %>
 </aside>

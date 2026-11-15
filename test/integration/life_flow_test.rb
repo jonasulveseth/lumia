@@ -20,6 +20,7 @@ class LifeFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#messages", text: /Vad händer i ditt liv/
     assert_select "#interview_progress button[disabled]"
+    assert_select "#interview_finish button", count: 0
 
     FakeAi.respond_with("Det låter tungt. Vill du att jag är rak med dig?", {
       summary: "Du vill sova bättre och orka mer.", birth_year: 1985, coach_style: "direct",
@@ -32,8 +33,13 @@ class LifeFlowTest < ActionDispatch::IntegrationTest
     perform_enqueued_jobs do
       post message_onboarding_path, params: { message: { content: "Jag sover dåligt, gillar medelhavskost men inte LCHF." } }, as: :turbo_stream
     end
+    # Svaret på formuläret lägger till båda meddelandena i rätt ordning.
+    assert_select "turbo-stream[action=append][target=messages] template > div", count: 2
     get onboarding_path
     assert_select "#interview_progress button:not([disabled])", text: /Klar/
+    assert_select "#interview_progress", text: /100%/
+    assert_select "#interview_finish form[action='#{finish_onboarding_path}'] button", text: /Gå vidare/
+    assert_select "#messages > div[data-final=true]", count: 3
     assert_select "#interview_profile", text: /Sova 7 timmar/
 
     post finish_onboarding_path

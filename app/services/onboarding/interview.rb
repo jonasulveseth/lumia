@@ -25,6 +25,8 @@ module Onboarding
 
     def draft = Draft.new(conversation.profile_draft)
     def ready? = draft.confidence >= READY_AT
+    # Mätaren är full när Lumia vet nog för att gå vidare – samma gräns som intervjuaren avrundar vid.
+    def progress_percent = [ (draft.confidence * 100.0 / READY_AT).round, 100 ].min
     def answered? = conversation.messages.where(role: "user").exists?
 
     # Meddelandena till språkmodellen för intervjuarens nästa replik.
@@ -76,6 +78,8 @@ module Onboarding
           partial: "onboarding/progress", locals: { interview: self }
         Turbo::StreamsChannel.broadcast_replace_to conversation, target: "interview_profile",
           partial: "onboarding/profile", locals: { interview: self }
+        Turbo::StreamsChannel.broadcast_replace_to conversation, target: "interview_finish",
+          partial: "onboarding/finish", locals: { interview: self }
       end
     end
 
