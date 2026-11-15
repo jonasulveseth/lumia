@@ -22,6 +22,8 @@ module ReplyStreaming
         last_push = Time.current
       end
     end
+    # Ett tomt svar skulle lämna "tänker"-snurran kvar för alltid; låt jobbet visa felet i stället.
+    raise Ai::Error, "Tomt svar från modellen" if text.blank?
     reply.update!(content: text, status: "done")
     text
   end

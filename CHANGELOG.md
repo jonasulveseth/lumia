@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-15
+
+### Fixes
+- Onboardingintervjun "frös": profilutkastet och mätaren slutade uppdateras. DeepSeek via Nebius resonerade före varje
+  svar och tankarna åt upp `max_tokens`, så JSON-svaret kapades och utkastet kastades tyst. Resonerandet är nu avstängt
+  för Nebius (`reasoning_effort: "none"`, som `think: false` för Ollama) – utkastet tar ca 5 s i stället för 25 s.
+  Kapade JSON-svar och tomma svar ger ett tydligt fel i loggen, och en tom replik visar felmeddelandet i stället för
+  en evig "tänker"-snurra. (862996c)
+
 ## 2026-11-08
 
 ### Features
