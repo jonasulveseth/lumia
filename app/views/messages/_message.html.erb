@@ -1,4 +1,6 @@
-<%= tag.div id: dom_id(message), class: "flex #{message.user? ? "justify-end" : "justify-start"}" do %>
+<%# data-final/data-length läses av chat-controllern: den släpper inte igenom en äldre version över en nyare. %>
+<%= tag.div id: dom_id(message), class: "flex #{message.user? ? "justify-end" : "justify-start"}",
+      data: { final: message.final?, length: message.content.to_s.length } do %>
   <% if message.user? %>
     <div class="max-w-[85%] rounded-2xl rounded-br-md bg-zinc-800 dark:bg-zinc-700 text-white px-4 py-2.5 text-sm whitespace-pre-line"><%= message.content %></div>
   <% else %>

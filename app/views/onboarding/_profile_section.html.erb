@@ -1,0 +1,10 @@
+<%# En hopfällbar del av profilpanelen. disclosure-controllern minns vad som är öppet när panelen byts ut. %>
+<details id="profile_<%= key %>" class="group border-t border-zinc-200 dark:border-zinc-800 pt-3" <%= "open" if local_assigns[:open] %>
+         data-controller="disclosure" data-action="toggle->disclosure#remember turbo:morph-element->disclosure#restore">
+  <summary class="flex items-center gap-2 cursor-pointer list-none [&::-webkit-details-marker]:hidden text-xs font-medium text-zinc-600 dark:text-zinc-300">
+    <span class="flex-1 min-w-0 truncate"><%= title %></span>
+    <% if local_assigns[:count] %><span class="text-zinc-400 dark:text-zinc-500"><%= count %></span><% end %>
+    <%= icon("chevron-down", css: "w-4 h-4 text-zinc-400 transition-transform group-open:rotate-180") %>
+  </summary>
+  <div class="mt-2"><%= yield %></div>
+</details>

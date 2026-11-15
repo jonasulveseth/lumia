@@ -18,11 +18,11 @@ class OnboardingController < ApplicationController
     content = params.dig(:message, :content).to_s.strip
     return head :unprocessable_entity if content.blank? || @conversation.nil?
 
-    @conversation.messages.create!(role: "user", content: content)
-    reply_to(@conversation)
+    message = @conversation.messages.create!(role: "user", content: content)
+    reply = reply_to(@conversation)
 
     respond_to do |format|
-      format.turbo_stream { head :ok } # meddelandena kommer via broadcast
+      format.turbo_stream { render turbo_stream: turbo_stream.append("messages", partial: "messages/message", collection: [ message, reply ]) }
       format.html { redirect_to onboarding_path }
     end
   end
@@ -41,6 +41,6 @@ class OnboardingController < ApplicationController
   end
 
   def reply_to(conversation)
-    InterviewReplyJob.perform_later(conversation.messages.create!(role: "assistant", status: "pending"))
+    conversation.messages.create!(role: "assistant", status: "pending").tap { InterviewReplyJob.perform_later(_1) }
   end
 end

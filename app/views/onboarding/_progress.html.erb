@@ -1,5 +1,5 @@
 <%# Broadcastas av InterviewReplyJob efter varje svar – använd inte current_user här. %>
-<% percent = interview.draft.confidence * 10 %>
+<% percent = interview.progress_percent %>
 <div id="interview_progress">
   <div class="flex items-center gap-3">
     <div class="flex-1 min-w-0">

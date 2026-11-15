@@ -23,7 +23,8 @@
     <%= form_with model: [@conversation, Message.new], class: "mt-4 flex items-end gap-2",
           data: { chat_target: "form", action: "turbo:submit-end->chat#reset" } do |f| %>
       <%= f.text_area :content, rows: 2, required: true, placeholder: t("coach.reply_placeholder"),
-            class: "#{ui_field(:input)} resize-none", data: { chat_target: "input", action: "keydown->chat#keydown" } %>
+            id: "chat_input", class: "#{ui_field(:input)} resize-none",
+            data: { chat_target: "input", action: "keydown->chat#keydown", turbo_permanent: true } %>
       <%= f.button class: ui_button(:primary), title: t("coach.send") do %><%= icon("send") %><% end %>
     <% end %>
   </div>

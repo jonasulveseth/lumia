@@ -1,0 +1,13 @@
+<%# Visas i samtalet när Lumia vet nog. Broadcastas av InterviewReplyJob – använd inte current_user här. %>
+<div id="interview_finish">
+  <% if interview.ready? %>
+    <div class="<%= ui_notice(:info) %>">
+      <div class="flex flex-1 flex-wrap items-center justify-between gap-3">
+        <p class="flex-1 min-w-48"><%= t("onboarding.interview.ready") %></p>
+        <%= button_to finish_onboarding_path, class: "#{ui_button(:primary)} shrink-0" do %>
+          <%= t("onboarding.interview.continue") %> <%= icon("arrow-right") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -2,7 +2,17 @@
 
 ## 2026-11-15
 
+### Features
+- Intervjun: när Lumia vet nog visas en "Gå vidare"-knapp direkt i samtalet, inte bara Klar-knappen överst.
+- Profilpanelen bredvid intervjun är hopfällbar (sammanfattning, livsområden, ramverk, minnen) och får aldrig bli
+  högre än sidan; vad som är öppet står kvar när panelen uppdateras (`disclosure`-controllern). (4aa5d9b)
+
 ### Fixes
+- Chatten (intervju och coach): svaret kunde hamna ovanför det man skrev, eller inte dyka upp utan omladdning.
+  Uppdateringarna gick som broadcasts som kan komma fram i fel ordning eller tappas. Nya meddelanden läggs nu till av
+  svaret på formuläret, en äldre version av ett meddelande får aldrig skriva över en nyare, och väntar ett svar utan
+  att något händer på 8 s (eller när fliken blir synlig igen) hämtas sidan om med morph. (4aa5d9b)
+- Intervjuns mätare visade 70 % fast intervjuaren avrundat: den är nu full vid samma gräns som Klar blir aktiv. (4aa5d9b)
 - Onboardingintervjun "frös": profilutkastet och mätaren slutade uppdateras. DeepSeek via Nebius resonerade före varje
   svar och tankarna åt upp `max_tokens`, så JSON-svaret kapades och utkastet kastades tyst. Resonerandet är nu avstängt
   för Nebius (`reasoning_effort: "none"`, som `think: false` för Ollama) – utkastet tar ca 5 s i stället för 25 s.
